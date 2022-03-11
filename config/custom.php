@@ -9,7 +9,7 @@ return [
         'verticalMenuNavbarType' => 'sticky', // options[String]: floating(default) / static / sticky / hidden (Warning:this option only applies to the vertical theme)
         'footerType' => 'static', // options[String]: static(default) / sticky / hidden
         'layoutWidth' => 'boxed', // options[String]: full / boxed(default),
-        'showMenu' => false, // options[Boolean]: true(default), false //show / hide main menu (Warning: if set to false it will hide the main menu)
+        'showMenu' => true, // options[Boolean]: true(default), false //show / hide main menu (Warning: if set to false it will hide the main menu)
         'bodyClass' => '', // add custom class
         'pageHeader' => true, // options[Boolean]: true(default), false (Page Header for Breadcrumbs)
         'contentLayout' => 'default', // options[String]: default, content-left-sidebar, content-right-sidebar, content-detached-left-sidebar, content-detached-right-sidebar (warning:use this option if your whole project with sidenav Otherwise override this option as page level )

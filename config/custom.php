@@ -2,14 +2,14 @@
 return [
     'custom' => [
         'mainLayoutType' => 'vertical', // Options[String]: vertical(default), horizontal
-        'theme' => 'light', // options[String]: 'light'(default), 'dark', 'bordered', 'semi-dark'
+        'theme' => 'dark', // options[String]: 'light'(default), 'dark', 'bordered', 'semi-dark'
         'sidebarCollapsed' => false, // options[Boolean]: true, false(default) (warning:this option only applies to the vertical theme.)
         'navbarColor' => '', // options[String]: bg-primary, bg-info, bg-warning, bg-success, bg-danger, bg-dark (default: '' for #fff)
-        'horizontalMenuType' => 'floating', // options[String]: floating(default) / static /sticky (Warning:this option only applies to the Horizontal theme.)
-        'verticalMenuNavbarType' => 'floating', // options[String]: floating(default) / static / sticky / hidden (Warning:this option only applies to the vertical theme)
+        'horizontalMenuType' => 'sticky', // options[String]: floating(default) / static /sticky (Warning:this option only applies to the Horizontal theme.)
+        'verticalMenuNavbarType' => 'sticky', // options[String]: floating(default) / static / sticky / hidden (Warning:this option only applies to the vertical theme)
         'footerType' => 'static', // options[String]: static(default) / sticky / hidden
         'layoutWidth' => 'boxed', // options[String]: full / boxed(default),
-        'showMenu' => true, // options[Boolean]: true(default), false //show / hide main menu (Warning: if set to false it will hide the main menu)
+        'showMenu' => false, // options[Boolean]: true(default), false //show / hide main menu (Warning: if set to false it will hide the main menu)
         'bodyClass' => '', // add custom class
         'pageHeader' => true, // options[Boolean]: true(default), false (Page Header for Breadcrumbs)
         'contentLayout' => 'default', // options[String]: default, content-left-sidebar, content-right-sidebar, content-detached-left-sidebar, content-detached-right-sidebar (warning:use this option if your whole project with sidenav Otherwise override this option as page level )

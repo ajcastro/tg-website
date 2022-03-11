@@ -1,4 +1,6 @@
-# TeleGaming Website
+# TG Website
+
+TeleGaming Website
 
 ```
 composer install

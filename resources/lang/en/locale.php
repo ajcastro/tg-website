@@ -1,6 +1,12 @@
 <?php
 
 return [
+    "Deposit" => "Deposit",
+    "Withdraw" => "Withdraw",
+    "Profile" => "Profile",
+    "Last 5 Transactions" => "Last 5 Transactions",
+    "Change Password" => "Change Password",
+    "Logout" => "Logout",
     "Apps & Pages" => "Apps & Pages",
     "User Interface" => "User Interface",
     "Dashboards" => "Dashboards",

@@ -5,3 +5,5 @@ use App\Http\Controllers\Website\IndexController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [IndexController::class, 'index'])->name('landing');
+
+include __DIR__.'/web-vuexy.php';

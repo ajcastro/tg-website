@@ -55,6 +55,10 @@
             data-feather="menu"></i></a></li>
     </ul>
     @endif
+    <ul class="nav navbar-nav bookmark-icons">
+      <li class="nav-item d-none d-lg-block">
+        <a class="navbar-brand" href="/">TELE<span>GAMING</span></a>
+      </li>
   </div>
   @include('panels.navbar-menu')
 </div>

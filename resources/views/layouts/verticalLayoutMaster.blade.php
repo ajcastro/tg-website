@@ -40,9 +40,9 @@ data-asset-path="{{ asset('/')}}">
     @else
     <div class="content-wrapper {{ $configData['layoutWidth'] === 'boxed' ? 'container-xxl p-0' : '' }}">
       {{-- Include Breadcrumb --}}
-      @if($configData['pageHeader'] === true && isset($configData['pageHeader']))
+      {{-- @if($configData['pageHeader'] === true && isset($configData['pageHeader']))
       @include('panels.breadcrumb')
-      @endif
+      @endif --}}
 
       <div class="content-body">
         {{-- Include Page Content --}}

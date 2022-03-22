@@ -2,6 +2,7 @@
 
 {{-- @section('title', 'TeleGaming') --}}
 
+@guest
 
 @section('page-style')
   {{-- Page Css files --}}
@@ -33,9 +34,7 @@
               autofocus
               value="{{ old('username') }}"
             />
-            @foreach ($errors->get('username') as $errorMessage)
-            <span id="basic-default-name-error" class="error">{{ $errorMessage }}</span>
-            @endforeach
+            <x-input-errors :messages="$errors->get('username')" />
           </div>
 
           <div class="mb-1">
@@ -56,9 +55,7 @@
                 aria-describedby="login-password"
               />
               <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
-              @foreach ($errors->get('password') as $errorMessage)
-              <span id="basic-default-name-error" class="error">{{ $errorMessage }}</span>
-              @endforeach
+              <x-input-errors :messages="$errors->get('password')" />
             </div>
           </div>
           <div class="mb-1">
@@ -91,3 +88,5 @@
 @section('page-script')
 <script src="{{asset(mix('js/scripts/pages/auth-login.js'))}}"></script>
 @endsection
+
+@endguest

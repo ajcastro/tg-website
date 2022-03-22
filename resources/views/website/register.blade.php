@@ -19,8 +19,6 @@
         <form class="auth-register-form mt-2" action="/register" method="POST">
           @csrf
 
-          @dump($errors)
-
           <div class="mb-1">
             <label for="register-username" class="form-label">Username</label>
             <input
@@ -28,11 +26,13 @@
               class="form-control"
               id="register-username"
               name="username"
-              placeholder="johndoe"
+              placeholder="username"
               aria-describedby="register-username"
               tabindex="1"
               autofocus
+              value="{{ old('username') }}"
             />
+            <x-input-errors :messages="$errors->get('username')" />
           </div>
           <div class="mb-1">
             <label for="register-email" class="form-label">Email</label>
@@ -41,10 +41,12 @@
               class="form-control"
               id="register-email"
               name="email"
-              placeholder="john@example.com"
+              placeholder="email"
               aria-describedby="register-email"
               tabindex="2"
+              value="{{ old('email') }}"
             />
+            <x-input-errors :messages="$errors->get('email')" />
           </div>
 
           <div class="mb-1">
@@ -60,6 +62,7 @@
                 tabindex="3"
               />
               <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
+              <x-input-errors :messages="$errors->get('password')" />
             </div>
           </div>
 

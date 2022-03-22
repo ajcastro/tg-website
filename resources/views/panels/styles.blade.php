@@ -26,6 +26,8 @@
 {{-- Page Styles --}}
 @yield('page-style')
 
+@stack('component-style')
+
 <!-- laravel style -->
 <link rel="stylesheet" href="{{ asset(mix('css/overrides.css')) }}" />
 

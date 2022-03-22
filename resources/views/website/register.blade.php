@@ -1,7 +1,6 @@
 @extends('layouts/contentLayoutMaster')
 
-{{-- @section('title', 'TeleGaming') --}}
-
+@section('title', 'Register')
 
 @section('page-style')
   {{-- Page Css files --}}
@@ -9,21 +8,18 @@
 
 @section('content')
 <div class="row landing-banner-image-wrapper">
-  <div class="col ">
+  <div class="col">
   </div>
-  @guest
   <div class="col-xs-12 col-md-6">
-    <x-auth.login-card />
+    <x-auth.register-card />
   </div>
-  @endguest
 </div>
 
 @endsection
 
 @section('vendor-script')
-<script src="{{asset(mix('vendors/js/forms/validation/jquery.validate.min.js'))}}"></script>
+<script src="{{asset('vendors/js/forms/validation/jquery.validate.min.js')}}"></script>
 @endsection
 
 @section('page-script')
-{{-- Page Script files --}}
 @endsection

@@ -44,15 +44,6 @@ class Role extends Model implements RelatesToWebsite
         static::observe(SetsCreatedByAndUpdatedBy::class);
     }
 
-    public function resolveRouteBinding($value, $field = null)
-    {
-        return (new RoleQuery)
-            ->withFields()
-            ->withInclude()
-            ->withFilter()
-            ->findOrFail($value);
-    }
-
     public function parentGroup()
     {
         return $this->belongsTo(ParentGroup::class);

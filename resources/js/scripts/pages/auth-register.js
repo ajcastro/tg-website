@@ -39,16 +39,19 @@ $(function () {
         $(element).valid();
       }, */
       rules: {
-        'register-username': {
+        'username': {
           required: true
         },
-        'register-email': {
+        'email': {
           required: true,
           email: true
         },
-        'register-password': {
+        'password': {
           required: true
-        }
+        },
+        'password_confirmation': {
+          required: true
+        },
       }
     });
   }

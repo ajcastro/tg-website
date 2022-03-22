@@ -80,20 +80,18 @@ class Member extends Authenticatable implements RelatesToWebsite
     ];
 
 
+    public static function booted()
+    {
+        static::creating(function (Member $member) {
+            $member->website_id = Website::getWebsiteId();
+        });
+    }
+
     public static function kickAll()
     {
         return MemberLog::whereNull('kicked_at')->update([
             'kicked_at' => now(),
         ]);
-    }
-
-    public function resolveRouteBinding($value, $field = null)
-    {
-        return (new MemberQuery)
-            ->withFields()
-            ->withInclude()
-            ->withFilter()
-            ->findOrFail($value);
     }
 
     public function website()

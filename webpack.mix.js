@@ -91,6 +91,10 @@ mix.then(() => {
   }
 })
 
+if (mix.inProduction()) {
+  mix.version()
+}
+
 // if (mix.inProduction()) {
 //   mix.version()
 //   mix.webpackConfig({
@@ -100,3 +104,5 @@ mix.then(() => {
 //   })
 //   mix.setResourceRoot('/demo/vuexy-bootstrap-laravel-admin-template-new/demo-2/')
 // }
+
+mix.disableSuccessNotifications();

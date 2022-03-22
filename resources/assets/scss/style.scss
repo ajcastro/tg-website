@@ -17,3 +17,13 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 .vertical-layout .header-navbar .navbar-container ul.navbar-nav li.dropdown .dropdown-menu {
 	right: auto;
 }
+
+
+.landing-banner-image-wrapper {
+	background: url(/images/landing.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+	min-height: 85vh;
+}

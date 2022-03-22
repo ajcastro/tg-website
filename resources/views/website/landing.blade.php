@@ -31,7 +31,7 @@
               aria-describedby="login-username"
               tabindex="1"
               autofocus
-              value=""
+              value="{{ old('username') }}"
             />
             @foreach ($errors->get('username') as $errorMessage)
             <span id="basic-default-name-error" class="error">{{ $errorMessage }}</span>

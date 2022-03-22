@@ -11,7 +11,7 @@
 @endsection
 
 <section class="bs-validation">
-  <form class="needs-validation" novalidate>
+    <form class="needs-validation" novalidate>
         <div class="mb-1">
             <label class="form-label" for="select-country1">Bank Sender</label>
             <select class="form-select" id="bankSender" required>

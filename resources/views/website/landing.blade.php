@@ -12,7 +12,7 @@
   <div class="col ">
   </div>
   @guest
-  <div class="col">
+  <div class="col-xs-12 col-md-6">
     <x-auth.login-card />
   </div>
   @endguest

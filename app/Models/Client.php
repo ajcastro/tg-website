@@ -65,15 +65,6 @@ class Client extends Model implements RelatesToWebsite
         });
     }
 
-    public function resolveRouteBinding($value, $field = null)
-    {
-        return (new ClientQuery)
-            ->withFields()
-            ->withInclude()
-            ->withFilter()
-            ->findOrFail($value);
-    }
-
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by_id');

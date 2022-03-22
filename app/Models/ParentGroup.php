@@ -60,15 +60,6 @@ class ParentGroup extends Model
         return static::where('code', $code)->first();
     }
 
-    public function resolveRouteBinding($value, $field = null)
-    {
-        return (new ParentGroupQuery)
-            ->withFields()
-            ->withInclude()
-            ->withFilter()
-            ->findOrFail($value);
-    }
-
     public function client()
     {
         return $this->belongsTo(Client::class);

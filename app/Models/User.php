@@ -64,20 +64,6 @@ class User extends Authenticatable implements RelatesToWebsite
     public static function booted()
     {
         static::observe(SetsCreatedByAndUpdatedBy::class);
-
-        // static::creating(function (User $user) {
-        //     $user->username = $user->username ?? $user->email;
-        //     $user->role_id = 1;
-        // });
-    }
-
-    public function resolveRouteBinding($value, $field = null)
-    {
-        return (new UserQuery)
-            ->withFields()
-            ->withInclude()
-            ->withFilter()
-            ->findOrFail($value);
     }
 
     public function parentGroup()

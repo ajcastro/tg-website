@@ -50,13 +50,12 @@ class Website extends Model implements AccessibleByUser
         static::observe(SetsCreatedByAndUpdatedBy::class);
     }
 
-    public function resolveRouteBinding($value, $field = null)
+
+    public static function getWebsiteId(): int
     {
-        return (new WebsiteQuery)
-            ->withFields()
-            ->withInclude()
-            ->withFilter()
-            ->findOrFail($value);
+        return config('website.id') ?? value(function () {
+           throw new \Exception("Config website.id or env WEBSITE_ID is not defined.");
+        });
     }
 
     public function parentGroups()

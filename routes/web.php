@@ -12,4 +12,4 @@ include __DIR__.'/web-vuexy.php';
 
 Auth::routes();
 
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout.get');

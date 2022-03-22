@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-<div class="auth-wrapper auth-basic px-2">
+<div class="auth-wrapper auth-basic px-2" style="min-height: 480px;">
   <div class="auth-inner my-2">
     <!-- Login basic -->
     <div class="card mb-0">

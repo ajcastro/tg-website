@@ -48,7 +48,10 @@ $(function () {
         },
         'register-password': {
           required: true
-        }
+        },
+        'confirm-password': {
+          required: true
+        },
       }
     });
   }

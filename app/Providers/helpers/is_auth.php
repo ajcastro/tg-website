@@ -3,7 +3,8 @@
 if (!function_exists('is_auth')) {
     function is_auth()
     {
-        return cache('is_auth');
+        return auth()->check();
+        // return cache('is_auth');
     }
 }
 

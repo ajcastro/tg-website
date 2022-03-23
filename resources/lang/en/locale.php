@@ -1,12 +1,16 @@
 <?php
 
 return [
+    // Website menu locale
     "Deposit" => "Deposit",
     "Withdraw" => "Withdraw",
     "Profile" => "Profile",
     "Last 5 Transactions" => "Last 5 Transactions",
+    "Last Transactions" => "Last Transactions",
     "Change Password" => "Change Password",
     "Logout" => "Logout",
+
+    // Vuexy default locale
     "Apps & Pages" => "Apps & Pages",
     "User Interface" => "User Interface",
     "Dashboards" => "Dashboards",

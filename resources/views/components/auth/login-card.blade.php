@@ -53,16 +53,16 @@
           <div class="mb-1">
             <div class="form-check">
               <input class="form-check-input" type="checkbox" id="remember-me" tabindex="3" />
-              <label class="form-check-label" for="remember-me"> Remember Me </label>
+              <label class="form-check-label" for="remember-me"> {{__('Remember Me')}} </label>
             </div>
           </div>
-          <button class="btn btn-primary w-100" tabindex="4">Sign in</button>
+          <button class="btn btn-primary w-100" tabindex="4">{{__('Login')}}</button>
         </form>
 
         <p class="text-center mt-2">
-          <span>New on our platform?</span>
+          <span>{{__('New on our platform?')}}</span>
           <a href="{{url('register')}}">
-            <span>Register Now</span>
+            <span>{{__('Register Now')}}</span>
           </a>
         </p>
 

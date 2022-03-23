@@ -4,6 +4,7 @@ return [
     "Deposit" => "Deposit",
     "Withdraw" => "Withdraw",
     "Profile" => "Profile",
+    "Banks" => "Banks",
     "Last 5 Transactions" => "Last 5 Transactions",
     "Change Password" => "Change Password",
     "Logout" => "Logout",

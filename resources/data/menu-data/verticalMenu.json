@@ -19,6 +19,12 @@
       "slug": "profile"
     },
     {
+      "url": "/banks",
+      "name": "Banks",
+      "icon": "briefcase",
+      "slug": "banks"
+    },
+    {
       "url": "/last_transactions",
       "name": "Last 5 Transactions",
       "icon": "book",

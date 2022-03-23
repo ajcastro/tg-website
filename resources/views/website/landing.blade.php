@@ -12,16 +12,14 @@
 <div class="row landing-banner-image-wrapper">
   <div class="col">
   </div>
-  @guest
-  <div class="col-xs-12 col-md-6">
+  <div class="col-xs-12 col-md-6" style="min-height: 70vh;">
+    @guest
     <x-auth.login-card />
+    @endguest
   </div>
-  <div class="row">
-    <div class="col-sm-12">
-      @include('website.landing-page.slider')
-    </div>
+  <div class="col-xs-12">
+    @include('website.landing-page.slider')
   </div>
-  @endguest
 </div>
 
 @endsection

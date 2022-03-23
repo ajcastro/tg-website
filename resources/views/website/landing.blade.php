@@ -5,17 +5,21 @@
 
 @section('page-style')
   {{-- Page Css files --}}
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 @endsection
 
 @section('content')
 <div class="row landing-banner-image-wrapper">
-  <div class="col ">
+  <div class="col">
   </div>
-  @guest
-  <div class="col-xs-12 col-md-6">
+  <div class="col-xs-12 col-md-6" style="min-height: 450px;">
+    @guest
     <x-auth.login-card />
+    @endguest
   </div>
-  @endguest
+  <div class="col-xs-12">
+    @include('website.landing-page.slider')
+  </div>
 </div>
 
 @endsection

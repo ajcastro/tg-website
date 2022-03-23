@@ -12,12 +12,28 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 
 @import "./style/navbar-brand";
 @import "./style/navbar-menu";
+@import "./style/landing-page/slider";
 
 // CSS Fix for vuexy
 .vertical-layout .header-navbar .navbar-container ul.navbar-nav li.dropdown .dropdown-menu {
 	right: auto;
 }
 
+.dark-layout body {
+	background-color: #161D31;
+}
+
+.dark-layout .header-navbar {
+	background-color: #161D31;
+}
+
+.dark-layout .navbar-sticky .header-navbar.navbar-shadow {
+	box-shadow: none;
+}
+
+html .navbar-sticky .app-content {
+	padding-top: 50px;
+}
 
 .landing-banner-image-wrapper {
 	background: url(/images/landing.jpg) no-repeat center center fixed;
@@ -26,4 +42,14 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
     -o-background-size: cover;
     background-size: cover;
 	min-height: 85vh;
+}
+
+.dark-layout a {
+	color: #695efc;
+}
+
+.dark-layout a:hover {
+    /* Darken on click by 15% (down to 85%) */
+	color: #695efc;
+    filter: brightness(0.85);
 }

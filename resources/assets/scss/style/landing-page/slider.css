@@ -1,81 +1,64 @@
-.card-overflow {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    overflow-x: scroll;
+
+.swiper-pagination-bullet {
+    height: 8px;
+    width: 8px;
+    background: #fff;
 }
 
-.card-overflow::-webkit-scrollbar {
-    width: 0;
-    background: transparent;
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+    background: #f00;
 }
 
-/*small to medium phone size*/
-@media (min-width: 320px) and (max-width: 639px) {
-    .card-overflow {
-        display: block;
-        flex-direction: none;
-        align-items: none;
-        overflow-x: none;
-    }
+/* .banner { */
+    /* margin-top: 35rem; */
+/* } */
 
-    .card-container {
-        margin: 0 auto;
-        width: 80%;
-    }
+.swiper {
+    width: 100%;
+    height: 250px;
 }
 
-/*large phone size*/
-@media (min-width: 640px) and (max-width: 767px) {
-    .card-overflow {
-        display: flex;
-        flex-direction: none;
-        align-items: none;
-        overflow-x: none;
-        flex-wrap: wrap;
-    }
+.banner .slide {
+    background-color: transparent;
+    border-radius: 20px;
 
-    .card-container {
-        margin: 0 auto;
-        width: 45%;
-    }
+    margin-bottom: 4rem;
 }
 
-/*tablet size*/
-@media (min-width: 768px) and (max-width: 1023px) {
-    .card-overflow {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        overflow-x: scroll;
-    }
-
-    .card-container {
-        margin-right: 2rem;
-        width: 50%;
-    }
+.banner .slide:hover .image img {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
 }
 
-/*laptop size*/
-@media (min-width: 1024px) and (max-width: 1279px) {
-    .card-container {
-        margin-right: 2rem;
-        width: 35%;
-    }
+.banner .slide .image {
+    height: 230px;
+    width: 98%;
+    overflow: hidden;
+    border-radius: 20px;
 }
 
-/*desktop size*/
-@media (min-width: 1280px) and (max-width: 1535px) {
-    .card-container {
-        margin-right: 2rem;
-        width: 30%;
-    }
+.banner .slide .imgbox {
+    height: 25rem;
+    width: 100%;
+    overflow: hidden;
 }
 
-/*xxl desktop size*/
-@media (min-width: 1356px) {
-    .card-container {
-        margin-right: 2rem;
-        width: 25%;
-    }
+.banner .block img {
+    width: 25%;
+    height: 25%;
+    -o-object-fit: fill;
+    object-fit: fill;
+}
+
+.banner .slide .image img {
+    height: 100%;
+    width: 100%;
+    -o-object-fit: fill;
+    object-fit: fill;
+}
+
+.section-with-carousel .swiper-slide image {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
 }

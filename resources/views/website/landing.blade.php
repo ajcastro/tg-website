@@ -5,6 +5,7 @@
 
 @section('page-style')
   {{-- Page Css files --}}
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 @endsection
 
 @section('content')
@@ -15,7 +16,11 @@
   <div class="col-xs-12 col-md-6">
     <x-auth.login-card />
   </div>
-  @include('website.landing-page.slider')
+  <div class="row">
+    <div class="col-sm-12">
+      @include('website.landing-page.slider')
+    </div>
+  </div>
   @endguest
 </div>
 

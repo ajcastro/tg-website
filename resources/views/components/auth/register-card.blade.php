@@ -77,24 +77,66 @@
           </div>
 
           <div class="mb-1">
-            <label for="register-referral_number" class="form-label">Referral Number</label>
+            <label for="register-referral_code" class="form-label">Referral Code</label>
             <input
               type="text"
               class="form-control"
-              id="register-referral_number"
-              name="referral_number"
+              id="register-referral_code"
+              name="referral_code"
               placeholder=""
-              aria-describedby="register-referral_number"
-              tabindex="1"
-              autofocus
-              value="{{ old('referral_number') }}"
+              aria-describedby="register-referral_code"
+              tabindex="5"
+              value="{{ old('referral_code') }}"
             />
-            <x-input-errors :messages="$errors->get('username')" />
+            <x-input-errors :messages="$errors->get('referral_code')" />
+          </div>
+
+          <div class="mb-1">
+            <label for="register-bank" class="form-label">{{__('Bank')}}</label>
+            <select
+              class="form-select"
+              id="register-bank" required name="bank" tabindex="6">
+                <option value="">-{{__('Select Bank')}}-</option>
+                <option value="2">BPI</option>
+            </select>
+            <x-input-errors :messages="$errors->get('bank')" />
+          </div>
+
+          <div class="mb-1">
+            <label for="register-account_number" class="form-label">Account Number</label>
+            <input
+              required
+              type="text"
+              class="form-control"
+              id="register-account_number"
+              name="account_number"
+              placeholder=""
+              aria-describedby="register-account_number"
+              tabindex="7"
+              value="{{ old('account_number') }}"
+            />
+            <x-input-errors :messages="$errors->get('account_number')" />
+          </div>
+
+          <div class="mb-1">
+            <label for="register-account_name" class="form-label">Account Name</label>
+            <input
+              required
+              type="text"
+              class="form-control"
+              id="register-account_name"
+              name="account_name"
+              placeholder=""
+              aria-describedby="register-account_name"
+              tabindex="8"
+              value="{{ old('account_name') }}"
+            />
+            <x-input-errors :messages="$errors->get('account_name')" />
           </div>
 
           <div class="mb-1">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="register-privacy-policy" tabindex="4" name="i_agree" />
+              <input class="form-check-input" type="checkbox" id="register-privacy-policy" tabindex="9" name="i_agree" />
               <label class="form-check-label" for="register-privacy-policy">
                 {{ __('I am 18 years old and have agreed to the') }} <br>
                 <a href="#">
@@ -103,7 +145,7 @@
               </label>
             </div>
           </div>
-          <button class="btn btn-primary w-100" tabindex="5">{{__('Sign up')}}</button>
+          <button class="btn btn-primary w-100" tabindex="10">{{__('Sign up')}}</button>
         </form>
 
         <p class="text-center mt-2">

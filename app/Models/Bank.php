@@ -34,12 +34,6 @@ class Bank extends Model
         'is_require_account_no' => 'boolean',
     ];
 
-    public static function booted()
-    {
-        static::creating(function (Bank $bank) {
-            $bank->website_id = $bank->website_id ?? Website::getWebsiteId();
-        });
-    }
 
     public static function getBanksOfCurrentWebsite()
     {

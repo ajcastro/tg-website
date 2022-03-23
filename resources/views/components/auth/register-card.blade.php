@@ -1,3 +1,7 @@
+@php
+$banks = \App\Models\Bank::getBanksOfCurrentWebsite();
+@endphp
+
 @push('component-style')
 <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/form-validation.css')) }}">
 <link rel="stylesheet" href="{{ asset(mix('css/base/pages/authentication.css')) }}">
@@ -97,14 +101,14 @@
               class="form-select"
               id="register-bank" required name="bank" tabindex="6">
                 <option value="">-{{__('Select Bank')}}-</option>
-                @foreach (\App\Models\Bank::getBanksOfCurrentWebsite() as $bank)
+                @foreach ($banks as $bank)
                 <option value="{{$bank->id}}">{{$bank->code}}</option>
                 @endforeach
             </select>
             <x-input-errors :messages="$errors->get('bank')" />
           </div>
 
-          <div class="mb-1">
+          <div id="account-number-wrapper" class="mb-1">
             <label for="register-account_number" class="form-label">Account Number</label>
             <input
               required
@@ -166,4 +170,21 @@
 
 @push('component-script')
 <script src="{{asset('js/scripts/pages/auth-register.js')}}"></script>
+<script>
+  $(function () {
+    var banks = {!! $banks->toJson() !!};
+
+    $('#register-bank').change(function () {
+      var $el = $('#register-bank');
+      var selectedBankId = $el.val()
+      var bank = banks.find((b) => b.id == selectedBankId) || {}
+
+      if (bank.is_require_account_no) {
+        $('#account-number-wrapper').css('display', 'block');
+      } else {
+        $('#account-number-wrapper').css('display', 'none');
+      }
+    })
+  })
+</script>
 @endpush

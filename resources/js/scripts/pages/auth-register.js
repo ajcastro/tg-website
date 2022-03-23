@@ -52,6 +52,9 @@ $(function () {
         'password_confirmation': {
           required: true
         },
+        'i_agree': {
+          required: true
+        },
       }
     });
   }

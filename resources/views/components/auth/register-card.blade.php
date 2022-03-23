@@ -77,8 +77,24 @@
           </div>
 
           <div class="mb-1">
+            <label for="register-referral_number" class="form-label">Referral Number</label>
+            <input
+              type="text"
+              class="form-control"
+              id="register-referral_number"
+              name="referral_number"
+              placeholder=""
+              aria-describedby="register-referral_number"
+              tabindex="1"
+              autofocus
+              value="{{ old('referral_number') }}"
+            />
+            <x-input-errors :messages="$errors->get('username')" />
+          </div>
+
+          <div class="mb-1">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="register-privacy-policy" tabindex="4" />
+              <input class="form-check-input" type="checkbox" id="register-privacy-policy" tabindex="4" name="i_agree" />
               <label class="form-check-label" for="register-privacy-policy">
                 I agree to <a href="#">privacy policy & terms</a>
               </label>

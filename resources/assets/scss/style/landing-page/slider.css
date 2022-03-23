@@ -1,0 +1,81 @@
+.card-overflow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: scroll;
+}
+
+.card-overflow::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
+/*small to medium phone size*/
+@media (min-width: 320px) and (max-width: 639px) {
+    .card-overflow {
+        display: block;
+        flex-direction: none;
+        align-items: none;
+        overflow-x: none;
+    }
+
+    .card-container {
+        margin: 0 auto;
+        width: 80%;
+    }
+}
+
+/*large phone size*/
+@media (min-width: 640px) and (max-width: 767px) {
+    .card-overflow {
+        display: flex;
+        flex-direction: none;
+        align-items: none;
+        overflow-x: none;
+        flex-wrap: wrap;
+    }
+
+    .card-container {
+        margin: 0 auto;
+        width: 45%;
+    }
+}
+
+/*tablet size*/
+@media (min-width: 768px) and (max-width: 1023px) {
+    .card-overflow {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        overflow-x: scroll;
+    }
+
+    .card-container {
+        margin-right: 2rem;
+        width: 50%;
+    }
+}
+
+/*laptop size*/
+@media (min-width: 1024px) and (max-width: 1279px) {
+    .card-container {
+        margin-right: 2rem;
+        width: 35%;
+    }
+}
+
+/*desktop size*/
+@media (min-width: 1280px) and (max-width: 1535px) {
+    .card-container {
+        margin-right: 2rem;
+        width: 30%;
+    }
+}
+
+/*xxl desktop size*/
+@media (min-width: 1356px) {
+    .card-container {
+        margin-right: 2rem;
+        width: 25%;
+    }
+}

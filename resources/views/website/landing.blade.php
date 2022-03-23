@@ -9,12 +9,13 @@
 
 @section('content')
 <div class="row landing-banner-image-wrapper">
-  <div class="col ">
+  <div class="col">
   </div>
   @guest
   <div class="col-xs-12 col-md-6">
     <x-auth.login-card />
   </div>
+  @include('website.landing-page.slider')
   @endguest
 </div>
 

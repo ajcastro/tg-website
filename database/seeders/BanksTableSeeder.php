@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Website;
 use Illuminate\Database\Seeder;
 
 class BanksTableSeeder extends Seeder
@@ -29,7 +30,9 @@ class BanksTableSeeder extends Seeder
         ];
 
         foreach ($banks as $bank) {
-            \App\Models\Bank::firstOrCreate(['code' => $bank['code']], $bank);
+            \App\Models\Bank::firstOrCreate(['code' => $bank['code']], $bank+[
+                'website_id' => Website::getWebsiteId(),
+            ]);
         }
     }
 }

@@ -12,7 +12,7 @@
 <div class="row landing-banner-image-wrapper">
   <div class="col">
   </div>
-  <div class="col-xs-12 col-md-6" style="min-height: 70vh;">
+  <div class="col-xs-12 col-md-6" style="min-height: 450px;">
     @guest
     <x-auth.login-card />
     @endguest

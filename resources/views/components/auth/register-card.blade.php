@@ -97,7 +97,9 @@
               class="form-select"
               id="register-bank" required name="bank" tabindex="6">
                 <option value="">-{{__('Select Bank')}}-</option>
-                <option value="2">BPI</option>
+                @foreach (\App\Models\Bank::getBanksOfCurrentWebsite() as $bank)
+                <option value="{{$bank->id}}">{{$bank->code}}</option>
+                @endforeach
             </select>
             <x-input-errors :messages="$errors->get('bank')" />
           </div>

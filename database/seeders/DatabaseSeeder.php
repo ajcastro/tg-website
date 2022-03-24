@@ -14,5 +14,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+
+        if (app()->environment('local', 'staging')) {
+            $this->call(BanksTableSeeder::class);
+        }
     }
 }

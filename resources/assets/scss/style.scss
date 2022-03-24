@@ -59,6 +59,11 @@ html .navbar-sticky .app-content {
     filter: brightness(0.85);
 }
 
+// bugfix for select.form-select not rending error color
+.dark-layout select.form-select.error {
+	border-color: #ea5455;
+}
+
 .navbar-brand {
 	margin-left: 9vw;
 }

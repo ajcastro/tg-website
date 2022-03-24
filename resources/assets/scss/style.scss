@@ -32,7 +32,12 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 }
 
 html .navbar-sticky .app-content {
-	padding-top: 50px;
+	padding-top: 50px !important;
+}
+@media (max-width: 767.98px) {
+	html body.navbar-sticky .app-content {
+		padding-top: 50px !important;
+	}
 }
 
 .landing-banner-image-wrapper {
@@ -52,4 +57,12 @@ html .navbar-sticky .app-content {
     /* Darken on click by 15% (down to 85%) */
 	color: #695efc;
     filter: brightness(0.85);
+}
+
+.navbar-brand {
+	margin-left: 9vw;
+}
+
+ul.nav.navbar-nav.navbar-menu {
+	margin-right: 9vw;
 }

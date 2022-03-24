@@ -571,6 +571,7 @@
     "/fonts/font-awesome/css/font-awesome.css": "/fonts/font-awesome/css/font-awesome.css",
     "/fonts/font-awesome/css/font-awesome.min.css": "/fonts/font-awesome/css/font-awesome.min.css",
     "/images/.DS_Store": "/images/.DS_Store",
+    "/images/landing.jpg": "/images/landing.jpg",
     "/data/.DS_Store": "/data/.DS_Store",
     "/data/ajax.php": "/data/ajax.php",
     "/data/invoice-list.json": "/data/invoice-list.json",

@@ -14,7 +14,7 @@ class ChangeColumnsNullableInMembersTable extends Migration
     public function up()
     {
         Schema::table('members', function (Blueprint $table) {
-            $table->string('referral_code')->nullable()->change();
+            $table->string('referral_number')->nullable()->change();
             $table->string('phone_number')->nullable()->change();
             $table->string('bank_group')->nullable()->change();
         });

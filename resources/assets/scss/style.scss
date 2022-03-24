@@ -32,7 +32,12 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 }
 
 html .navbar-sticky .app-content {
-	padding-top: 50px;
+	padding-top: 50px !important;
+}
+@media (max-width: 767.98px) {
+	html body.navbar-sticky .app-content {
+		padding-top: 50px !important;
+	}
 }
 
 .landing-banner-image-wrapper {
@@ -57,4 +62,12 @@ html .navbar-sticky .app-content {
 // bugfix for select.form-select not rending error color
 .dark-layout select.form-select.error {
 	border-color: #ea5455;
+}
+
+.navbar-brand {
+	margin-left: 9vw;
+}
+
+ul.nav.navbar-nav.navbar-menu {
+	margin-right: 9vw;
 }

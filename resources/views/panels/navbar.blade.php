@@ -47,7 +47,7 @@
     <nav
       class="header-navbar navbar navbar-expand-lg align-items-center {{ $configData['navbarClass'] }} navbar-light navbar-shadow {{ $configData['navbarColor'] }} {{ $configData['layoutWidth'] === 'boxed' && $configData['verticalMenuNavbarType'] === 'navbar-floating' ? 'container-xxl' : '' }}">
 @endif
-<div class="navbar-container d-flex content" style="padding: 0px 150px;">
+<div class="navbar-container d-flex content">
   <div class="bookmark-wrapper d-flex align-items-center">
     @if (is_auth())
     <ul class="nav navbar-nav d-xl-none">

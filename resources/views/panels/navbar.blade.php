@@ -47,7 +47,7 @@
     <nav
       class="header-navbar navbar navbar-expand-lg align-items-center {{ $configData['navbarClass'] }} navbar-light navbar-shadow {{ $configData['navbarColor'] }} {{ $configData['layoutWidth'] === 'boxed' && $configData['verticalMenuNavbarType'] === 'navbar-floating' ? 'container-xxl' : '' }}">
 @endif
-<div class="navbar-container d-flex content" style="padding: 0px 150px;">
+<div class="navbar-container d-flex content"> {{-- style="padding: 0px 150px;" --}}
   <div class="bookmark-wrapper d-flex align-items-center">
     @if (is_auth())
     <ul class="nav navbar-nav d-xl-none">
@@ -59,7 +59,27 @@
       <li class="nav-item d-none d-lg-block">
         <a class="navbar-brand" href="/">TELE<span>GAMING</span></a>
       </li>
+    </ul>
   </div>
+  @if (!is_auth())
+    <div class="d-flex flex-column justify-content-end w-100 d-md-none">
+      <div class="d-flex justify-content-end w-100">
+        <a
+          class="navbar-toggler"
+          data-bs-toggle="collapse"
+          data-bs-target="#mobileNavBar"
+          style="color:white"
+        >
+          <i class="ficon" data-feather="menu"></i>
+        </a>
+      </div>
+      <div class="collapse" id="mobileNavBar">
+          <ul class="nav navbar-nav d-flex flex-column">
+            @each('panels.navbar-submenu-mobile', App\Models\Menu::tree(), 'menu')
+          </ul>
+      </div>
+    </div>
+  @endif
   @include('panels.navbar-menu')
 </div>
 </nav>

@@ -16,8 +16,8 @@ class CreatePromotionSettingsTable extends Migration
         Schema::create('promotion_settings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('promotion_id');
-            $table->timestamp('valid_from');
-            $table->timestamp('valid_thru');
+            $table->timestamp('valid_from')->nullable();
+            $table->timestamp('valid_thru')->nullable();
             $table->string('given_method');
             $table->boolean('is_for_new_member_only')->default(0);
             $table->unsignedTinyInteger('promotion_type');

@@ -61,25 +61,24 @@
       </li>
     </ul>
   </div>
-  @if (!is_auth())
-    <div class="d-flex flex-column justify-content-end w-100 d-md-none">
-      <div class="d-flex justify-content-end w-100">
-        <a
-          class="navbar-toggler"
-          data-bs-toggle="collapse"
-          data-bs-target="#mobileNavBar"
-          style="color:white"
-        >
-          <i class="ficon" data-feather="menu"></i>
-        </a>
-      </div>
-      <div class="collapse" id="mobileNavBar">
-          <ul class="nav navbar-nav d-flex flex-column">
-            @each('panels.navbar-submenu-mobile', App\Models\Menu::tree(), 'menu')
-          </ul>
-      </div>
+
+  <div class="d-flex flex-column justify-content-end w-100 d-md-none">
+    <div class="d-flex justify-content-end w-100">
+      <a
+        class="navbar-toggler"
+        data-bs-toggle="collapse"
+        data-bs-target="#mobileNavBar"
+        style="color:white"
+      >
+        <i class="ficon" data-feather="menu"></i>
+      </a>
     </div>
-  @endif
+    <div class="collapse" id="mobileNavBar">
+        <ul class="nav navbar-nav d-flex flex-column">
+          @each('panels.navbar-submenu-mobile', App\Models\Menu::tree(), 'menu')
+        </ul>
+    </div>
+  </div>
   @include('panels.navbar-menu')
 </div>
 </nav>

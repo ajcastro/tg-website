@@ -2,10 +2,15 @@
 
 {{-- @section('title', 'TeleGaming') --}}
 
+@section('vendor-style')
+<link rel="stylesheet" href="{{ asset(mix('vendors/css/animate/animate.min.css')) }}">
+<link rel="stylesheet" href="{{ asset(mix('vendors/css/extensions/sweetalert2.min.css')) }}">
+@endsection
 
 @section('page-style')
   {{-- Page Css files --}}
   <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="{{asset(mix('css/base/plugins/extensions/ext-component-sweet-alerts.css'))}}">
 @endsection
 
 @section('content')
@@ -21,13 +26,50 @@
     @include('website.landing-page.slider')
   </div>
 </div>
+<!-- INCLUDE MODALS  -->
+@auth
+  @include('website.deposit.modal')
+  @include('website.withdraw.modal')
+  @include('website.profile.modal')
+  @include('website.transactions.modal')
+  @include('website.change_password.modal')
+@endauth
+<!-- END MODALS  -->
 
 @endsection
 
 @section('vendor-script')
 <script src="{{asset(mix('vendors/js/forms/validation/jquery.validate.min.js'))}}"></script>
+<script src="{{ asset(mix('vendors/js/extensions/sweetalert2.all.min.js')) }}"></script>
+<script src="{{ asset(mix('vendors/js/extensions/polyfill.min.js')) }}"></script>
 @endsection
 
 @section('page-script')
 {{-- Page Script files --}}
+<script>
+window.swalSuccess = function (text) {
+  Swal.fire({
+    text: text,
+    icon: 'success',
+    customClass: {
+      confirmButton: 'btn btn-primary'
+    },
+    buttonsStyling: false
+  });
+}
+window.setFormErrors = function ($form, errors) {
+  var formId = $form.attr('id');
+
+  $('#'+formId+' .invalid-feedback.d-block').remove();
+
+  for (var key in errors) {
+    var messages = errors[key];
+    var divs = '';
+    $(messages).each(function (index, message) {
+      divs += '<div class="invalid-feedback d-block">'+message+'</div>'
+    })
+    $(divs).insertAfter('#'+formId+' [name='+key+']')
+  }
+}
+</script>
 @endsection

@@ -48,7 +48,7 @@
 
 </section>
 
-@section('page-script')
+@push('page-script')
 <script src="https://unpkg.com/swiper@7.4.1/swiper-bundle.min.js"></script>
 
 <script>
@@ -77,4 +77,4 @@
         },
     });
 </script>
-@endsection
+@endpush

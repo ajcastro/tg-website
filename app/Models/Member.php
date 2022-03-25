@@ -124,6 +124,16 @@ class Member extends Authenticatable implements RelatesToWebsite
         return $this->hasMany(MemberBank::class);
     }
 
+    public function transactions()
+    {
+        return $this->hasMany(MemberTransaction::class);
+    }
+
+    public function memberPromotions()
+    {
+        return $this->hasMany(MemberPromotion::class);
+    }
+
     public function activeLog()
     {
         return $this->hasOne(MemberLog::class)->whereNull('kicked_at');

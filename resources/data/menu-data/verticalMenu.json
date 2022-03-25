@@ -20,7 +20,7 @@
     },
     {
       "url": "/last_transactions",
-      "name": "Last 5 Transactions",
+      "name": "Transactions History",
       "icon": "book",
       "slug": "last_transactions"
     },

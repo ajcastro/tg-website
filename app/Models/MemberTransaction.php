@@ -61,11 +61,15 @@ class MemberTransaction extends Model implements RelatesToWebsite
         'approved_at' => 'timestamp',
     ];
 
+    protected $attributes = [
+        'status' => MemberTransactionStatus::NEW
+    ];
+
 
     public static function booted()
     {
         static::creating(function (MemberTransaction $transaction) {
-            $transaction->website_id = $transaction->website_id ?? $transaction->member->website_id;
+            $transaction->website_id = $transaction->website_id ?? Website::getWebsiteId();
             $transaction->sequence = static::getNextSequence($transaction->type, $transaction->website_id);
         });
     }
@@ -147,6 +151,36 @@ class MemberTransaction extends Model implements RelatesToWebsite
     public function getTicketIdAttribute()
     {
         return static::parseToTicketId($this->type, $this->website_id, $this->sequence);
+    }
+
+    public function setAmountAttribute($amount)
+    {
+        $this->attributes['amount'] = $amount;
+
+        if ($this->type === 'deposit') {
+            $this->attributes['credit_amount'] = $amount;
+        } else {
+            $this->attributes['debit_amount'] = $amount;
+        }
+    }
+
+    public function getStatusDisplayAttribute()
+    {
+        if ($this->status === MemberTransactionStatus::NEW) {
+            return 'New';
+        }
+
+        if ($this->status === MemberTransactionStatus::APPROVED) {
+            return 'Approved';
+        }
+
+        if ($this->status === MemberTransactionStatus::REJECTED) {
+            return 'Rejected';
+        }
+
+        if ($this->status === MemberTransactionStatus::IN_PROGRESS) {
+            return 'In-progress';
+        }
     }
 
     public function approve($user)

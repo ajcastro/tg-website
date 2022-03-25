@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bank;
 use App\Models\Member;
+use App\Models\MemberBank;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller
 {
@@ -54,7 +57,19 @@ class RegisterController extends Controller
             'username' => ['required', 'string', 'max:255', 'unique:members'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:members'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'bank' => ['required', 'exists:banks,id'],
+            'account_number' => [
+                Rule::requiredIf(function () {
+                    return $this->getBank()->is_require_account_no;
+                }),
+            ],
+            'account_name' => ['required', 'string', 'max:255'],
         ]);
+    }
+
+    private function getBank(): ?Bank
+    {
+        return Bank::find(request('bank'));
     }
 
     /**
@@ -65,11 +80,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return Member::create([
+        /** @var Member */
+        $member = Member::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'signup_using_referral_code' => $data['referral_code'] ?? null,
         ]);
+
+        $bank = $this->getBank();
+
+        $member->banks()->save(MemberBank::make([
+            'account_code' => $bank->code,
+            'account_number' => request('account_number'),
+            'account_name' => request('account_name'),
+        ]));
+
+        return $member;
     }
 
     /**

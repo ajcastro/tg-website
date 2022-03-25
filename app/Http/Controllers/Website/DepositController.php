@@ -25,6 +25,7 @@ class DepositController extends Controller
         /** @var Member */
         $member = $request->user();
         $bank = Bank::find($request->bank_destination_id);
+        /** @var Promotion */
         $promotion = Promotion::find($request->promotion_id);
         $memberBank = $member->banks()->find($request->account_sender_id);
 
@@ -44,15 +45,14 @@ class DepositController extends Controller
             'screenshot_path' => $request->file('screenshot')->store('deposits'),
         ]);
 
-        // TODO: amount calculations
         $memberPromotion = MemberPromotion::make([
             'promotion_id' => $promotion->id,
             'deposit_date' => now(),
-            'expire_date' => $promotion->valid_thru,
+            'expire_date' => $promotion->setting->valid_thru,
             'deposit_amount' => $request->total_deposit,
-            'bonus_amount' => null,
-            'obligation_amount' => null,
-            'turn_over_amount' => null,
+            'bonus_amount' => $promotion->calculateBonusAmount($request->total_deposit),
+            'obligation_amount' => $promotion->calculateObligationAmount($request->total_deposit),
+            'turn_over_amount' => 0, // TODO: what is the formula for this?
         ]);
 
         $member->transactions()->save($transaction);

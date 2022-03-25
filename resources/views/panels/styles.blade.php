@@ -6,6 +6,7 @@
 @endif
 
 @yield('vendor-style')
+@stack('vendor-style')
 <!-- END: Vendor CSS-->
 
 <!-- BEGIN: Theme CSS-->
@@ -25,6 +26,7 @@
 
 {{-- Page Styles --}}
 @yield('page-style')
+@stack('page-style')
 
 @stack('component-style')
 

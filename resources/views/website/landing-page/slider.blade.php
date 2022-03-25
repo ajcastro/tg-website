@@ -1,4 +1,4 @@
-<section class="banner" id="banner" style="margin: 0px 8vw; margin-top: -20px;">
+<section class="banner" id="banner" style="margin: 0px 8vw;">
     <div class="swiper banner-slider">
         <div class="swiper-wrapper slide-wrapper">
             <div class="swiper-slide slide">
@@ -56,10 +56,10 @@
         spaceBetween: 10,
         grabCursor: true,
         loop:true,
-        // autoplay: {
-        //     delay: 5000,
-        //     disableOnInteraction: false,
-        // },
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        },
         pagination: {
             el: ".swiper-pagination",
             clickable: true,

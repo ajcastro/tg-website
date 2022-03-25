@@ -26,7 +26,7 @@ class PromotionSettingFactory extends Factory
         return [
             'promotion_id' => Promotion::factory(),
             'valid_from' => $this->faker->dateTime(),
-            'valid_until' => $this->faker->dateTime(),
+            'valid_thru' => $this->faker->dateTime(),
             'given_method' => $this->faker->word,
             'is_for_new_member_only' => $this->faker->boolean,
             'promotion_type' => $this->faker->randomDigitNotNull,

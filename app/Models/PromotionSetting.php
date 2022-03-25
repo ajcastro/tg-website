@@ -17,7 +17,7 @@ class PromotionSetting extends Model
     protected $fillable = [
         'promotion_id',
         'valid_from',
-        'valid_until',
+        'valid_thru',
         'given_method',
         'is_for_new_member_only',
         'promotion_type',
@@ -42,8 +42,8 @@ class PromotionSetting extends Model
     protected $casts = [
         'id' => 'integer',
         'promotion_id' => 'integer',
-        'valid_from' => 'timestamp',
-        'valid_until' => 'timestamp',
+        'valid_from' => 'datetime',
+        'valid_thru' => 'datetime',
         'is_for_new_member_only' => 'boolean',
         'promotion_type' => 'integer',
         'allowed_n_times' => 'integer',

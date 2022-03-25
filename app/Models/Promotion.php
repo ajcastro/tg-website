@@ -37,8 +37,29 @@ class Promotion extends Model
         'is_active' => 'boolean',
     ];
 
+    public static function getPromotionsOfCurrentWebsite()
+    {
+        return static::ofCurrentWebsite()
+            ->orderBy('sort_order')
+            ->get();
+    }
+
     public function website()
     {
         return $this->belongsTo(Website::class);
+    }
+
+    public function setting()
+    {
+        return $this->hasOne(PromotionSetting::class);
+    }
+
+    public function promotionSetting()
+    {
+        return $this->hasOne(PromotionSetting::class);
+    }
+    public function scopeOfCurrentWebsite($query)
+    {
+        $query->where('website_id', Website::getWebsiteId());
     }
 }

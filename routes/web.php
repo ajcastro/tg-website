@@ -10,9 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [IndexController::class, 'index'])->name('landing');
 
-Route::get('/deposit', [DepositController::class, 'index'])->name('deposit');
-
-include __DIR__.'/web-vuexy.php';
+Route::post('/deposit', [DepositController::class, 'deposit'])->name('deposit');
 
 Auth::routes();
 

@@ -43,6 +43,14 @@ class MemberPromotion extends Model
         'turn_over_amount' => 'decimal:2',
     ];
 
+
+    public static function booted()
+    {
+        static::creating(function (MemberPromotion $memberPromotion) {
+            $memberPromotion->website_id = $memberPromotion->website_id ?? Website::getWebsiteId();
+        });
+    }
+
     public function website()
     {
         return $this->belongsTo(Website::class);

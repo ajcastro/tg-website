@@ -17,7 +17,7 @@ class CreatePromotionSettingsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('promotion_id');
             $table->timestamp('valid_from');
-            $table->timestamp('valid_until');
+            $table->timestamp('valid_thru');
             $table->string('given_method');
             $table->boolean('is_for_new_member_only')->default(0);
             $table->unsignedTinyInteger('promotion_type');

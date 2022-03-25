@@ -21,6 +21,11 @@
     @include('website.landing-page.slider')
   </div>
 </div>
+<!-- INCLUDE MODALS  -->
+@auth
+  @include('website.deposit.modal')
+@endauth
+<!-- END MODALS  -->
 
 @endsection
 

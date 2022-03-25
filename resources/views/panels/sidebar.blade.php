@@ -24,6 +24,28 @@ $configData = Helper::applClasses();
         </span>
         <i data-feather="more-horizontal"></i>
       </li>
+      <li class="nav-item">
+        <a
+          data-bs-toggle="modal"
+          data-bs-target="#depositModal"
+          href="javascript:void(0)"
+          class="d-flex align-items-center"
+        >
+          <i data-feather="download"></i>
+          <span class="menu-title text-truncate">{{ __('Deposit') }}</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          data-bs-toggle="modal"
+          data-bs-target="#depositModal"
+          href="javascript:void(0)"
+          class="d-flex align-items-center"
+        >
+          <i data-feather="upload"></i>
+          <span class="menu-title text-truncate">{{ __('Withdraw') }}</span>
+        </a>
+      </li>
       {{-- Foreach menu item starts --}}
       @if(isset($menuData[0]))
       @foreach($menuData[0]->menu as $menu)

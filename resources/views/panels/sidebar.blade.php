@@ -46,6 +46,48 @@ $configData = Helper::applClasses();
           <span class="menu-title text-truncate">{{ __('Withdraw') }}</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a
+          data-bs-toggle="modal"
+          data-bs-target="#profileModal"
+          href="javascript:void(0)"
+          class="d-flex align-items-center"
+        >
+          <i data-feather="user"></i>
+          <span class="menu-title text-truncate">{{ __('Profile') }}</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          data-bs-toggle="modal"
+          data-bs-target="#transactionsModal"
+          href="javascript:void(0)"
+          class="d-flex align-items-center"
+        >
+          <i data-feather="book"></i>
+          <span class="menu-title text-truncate">{{ __('Transactions') }}</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          data-bs-toggle="modal"
+          data-bs-target="#changePasswordModal"
+          href="javascript:void(0)"
+          class="d-flex align-items-center"
+        >
+          <i data-feather="lock"></i>
+          <span class="menu-title text-truncate">{{ __('Change Password') }}</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          href="{{ url('/logout') }}"
+          class="d-flex align-items-center"
+        >
+          <i data-feather="log-out"></i>
+          <span class="menu-title text-truncate">{{ __('Logout') }}</span>
+        </a>
+      </li>
       {{-- Foreach menu item starts --}}
       @if(isset($menuData[0]))
       @foreach($menuData[0]->menu as $menu)

@@ -2,10 +2,15 @@
 
 {{-- @section('title', 'TeleGaming') --}}
 
+@section('vendor-style')
+<link rel="stylesheet" href="{{ asset(mix('vendors/css/animate/animate.min.css')) }}">
+<link rel="stylesheet" href="{{ asset(mix('vendors/css/extensions/sweetalert2.min.css')) }}">
+@endsection
 
 @section('page-style')
   {{-- Page Css files --}}
   <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="{{asset(mix('css/base/plugins/extensions/ext-component-sweet-alerts.css'))}}">
 @endsection
 
 @section('content')
@@ -31,8 +36,22 @@
 
 @section('vendor-script')
 <script src="{{asset(mix('vendors/js/forms/validation/jquery.validate.min.js'))}}"></script>
+<script src="{{ asset(mix('vendors/js/extensions/sweetalert2.all.min.js')) }}"></script>
+<script src="{{ asset(mix('vendors/js/extensions/polyfill.min.js')) }}"></script>
 @endsection
 
 @section('page-script')
 {{-- Page Script files --}}
+<script>
+window.swalSuccess = function (text) {
+  Swal.fire({
+    text: text,
+    icon: 'success',
+    customClass: {
+      confirmButton: 'btn btn-primary'
+    },
+    buttonsStyling: false
+  });
+}
+</script>
 @endsection

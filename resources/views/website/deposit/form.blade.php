@@ -111,12 +111,11 @@
                 $(form).removeClass('invalid')
                 $('#depositModal').hide()
                 form.reset()
-                alert('Deposit is successful!')
-                location.reload()
-                // const modal = bootstrap.Modal.getInstance(document.querySelector('#depositModal'));
-                // modal.hide();
-            }).fail(function () {
-                alert('Something went wrong!')
+                window.swalSuccess('Deposit is successful!');
+                var modal = bootstrap.Modal.getInstance(document.querySelector('#depositModal'));
+                modal.hide();
+            }).fail(function (e) {
+                alert('Something went wrong! Please try again.');
             });
         })
     })

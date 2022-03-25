@@ -144,6 +144,11 @@ class Member extends Authenticatable implements RelatesToWebsite
         $query->where('website_id', $website->id);
     }
 
+    public function getCurrentBalance()
+    {
+        return 10000;
+    }
+
     public function getMemberLevelDisplayAttribute()
     {
         if ($this->member_level === MemberLevel::Regular) {

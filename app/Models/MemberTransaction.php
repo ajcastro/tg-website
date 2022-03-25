@@ -164,6 +164,25 @@ class MemberTransaction extends Model implements RelatesToWebsite
         }
     }
 
+    public function getStatusDisplayAttribute()
+    {
+        if ($this->status === MemberTransactionStatus::NEW) {
+            return 'New';
+        }
+
+        if ($this->status === MemberTransactionStatus::APPROVED) {
+            return 'Approved';
+        }
+
+        if ($this->status === MemberTransactionStatus::REJECTED) {
+            return 'Rejected';
+        }
+
+        if ($this->status === MemberTransactionStatus::IN_PROGRESS) {
+            return 'In-progress';
+        }
+    }
+
     public function approve($user)
     {
         $this->status = MemberTransactionStatus::APPROVED;

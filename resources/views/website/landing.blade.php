@@ -31,6 +31,7 @@
   @include('website.deposit.modal')
   @include('website.withdraw.modal')
   @include('website.profile.modal')
+  @include('website.transactions.modal')
 @endauth
 <!-- END MODALS  -->
 

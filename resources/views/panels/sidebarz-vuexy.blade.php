@@ -17,13 +17,6 @@ $configData = Helper::applClasses();
   <div class="shadow-bottom"></div>
   <div class="main-menu-content">
     <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-      <li class="navigation-header user-info">
-        <span>
-          <div>{{ auth()->user()->username }}</div>
-          <div>{{__('Balance')}}: {{number_format(auth()->user()->getCurrentBalance(), 2)}}</div>
-        </span>
-        <i data-feather="more-horizontal"></i>
-      </li>
       {{-- Foreach menu item starts --}}
       @if(isset($menuData[0]))
       @foreach($menuData[0]->menu as $menu)

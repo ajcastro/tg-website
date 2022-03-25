@@ -71,3 +71,16 @@ html .navbar-sticky .app-content {
 ul.nav.navbar-nav.navbar-menu {
 	margin-right: 9vw;
 }
+
+.main-menu-content {
+	margin-top: 20px;
+}
+
+.navigation .navigation-header.user-info {
+	text-transform: none;
+}
+
+.main-menu.menu-dark .navigation .navigation-header.user-info span {
+	font-weight: 600;
+	font-size: 15px;
+}

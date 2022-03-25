@@ -113,8 +113,10 @@
                 window.swalSuccess('Deposit is successful!');
                 var modal = bootstrap.Modal.getInstance(document.querySelector('#depositModal'));
                 modal.hide();
+                window.setFormErrors($(form), []);
             }).fail(function (e) {
-                alert('Something went wrong! Please try again.');
+                $(form).removeClass('was-validated')
+                window.setFormErrors($(form), e.responseJSON.errors);
             });
         })
     })

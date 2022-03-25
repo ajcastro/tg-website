@@ -11,59 +11,46 @@
 @endpush
 
 <section class="bs-validation">
-    <form id="withdraw-form" class="needs-validation" novalidate enctype="multipart/form-data">
+    <form id="change-password-form" class="needs-validation" novalidate enctype="multipart/form-data">
         @csrf
 
         <div class="mb-1">
-            <label class="d-block form-label" for="recipient_bank">Recipient Bank</label>
+            <label class="d-block form-label" for="change-pass-old_password">Old Password</label>
             <input
-                type="text"
-                id="recipient_bank"
+                type="password"
+                id="change-pass-old_password"
                 class="form-control"
                 placeholder=""
                 required
-                name="recipient_bank"
+                name="old_password"
             />
-            <div class="invalid-feedback">Please enter your recipient bank</div>
+            <div class="invalid-feedback">Please enter your old password</div>
         </div>
 
         <div class="mb-1">
-            <label class="d-block form-label" for="account_name">Account Name</label>
+            <label class="d-block form-label" for="change-pass_new_password">New Password</label>
             <input
-                type="text"
-                id="account_name"
+                type="password"
+                id="change-pass_new_password"
                 class="form-control"
                 placeholder=""
                 required
-                name="account_name"
+                name="new_password"
             />
-            <div class="invalid-feedback">Please enter your account name</div>
+            <div class="invalid-feedback">Please enter your new password</div>
         </div>
 
         <div class="mb-1">
-            <label class="d-block form-label" for="account_number">Account Number</label>
+            <label class="d-block form-label" for="change-pass_password_confirmation">Confirm Password</label>
             <input
-                type="text"
-                id="account_number"
+                type="password"
+                id="change-pass_password_confirmation"
                 class="form-control"
                 placeholder=""
                 required
-                name="account_number"
+                name="new_password_confirmation"
             />
-            <div class="invalid-feedback">Please enter your account number</div>
-        </div>
-
-        <div class="mb-1">
-            <label class="form-label" for="withdraw-amount">Amount</label>
-            <input
-                type="number"
-                id="withdraw-amount"
-                class="form-control"
-                placeholder="Total Deposit"
-                required
-                name="amount"
-            />
-            <div class="invalid-feedback">Please enter withdraw amount.</div>
+            <div class="invalid-feedback">Please enter your password confirmation</div>
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -81,12 +68,14 @@
 <script src="{{ asset(mix('js/scripts/forms/form-validation.js')) }}"></script>
 <script>
     $(function () {
-        $('#withdraw-form').on('submit', function (e) {
+        $('#change-password-form').on('submit', function (e) {
             var form = this;
             if (!form.checkValidity()) return;
 
+            $(form).removeClass('was-validated')
+
             $.ajax({
-                url: "/withdraw",
+                url: "/change_password",
                 type: 'POST',
                 data: new FormData(form),
                 processData: false,
@@ -95,8 +84,8 @@
                 $(form).removeClass('was-validated')
                 $(form).removeClass('invalid')
                 form.reset()
-                window.swalSuccess('Withdraw is successful!');
-                var modal = bootstrap.Modal.getInstance(document.querySelector('#withdrawModal'));
+                window.swalSuccess('Change Password is successful!');
+                var modal = bootstrap.Modal.getInstance(document.querySelector('#changePasswordModal'));
                 modal.hide();
                 window.setFormErrors($(form), []);
             }).fail(function (e) {

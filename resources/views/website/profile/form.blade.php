@@ -15,7 +15,7 @@
         @csrf
 
         <div class="mb-1">
-            <label class="d-block form-label" for="profile-email">Username</label>
+            <label class="d-block form-label" for="profile-username">Username</label>
             <input
                 type="text"
                 id="profile-username"
@@ -80,6 +80,7 @@
         });
 
         $('#profile-form').on('submit', function (e) {
+            $(form).removeClass('was-validated')
             var form = this;
             if (!form.checkValidity()) return;
 
@@ -96,8 +97,10 @@
                 window.swalSuccess('Updating profile is successful!');
                 var modal = bootstrap.Modal.getInstance(document.querySelector('#profileModal'));
                 modal.hide();
+                window.setFormErrors($(form), []);
             }).fail(function (e) {
-                alert('Something went wrong! Please try again.');
+                $(form).removeClass('was-validated')
+                window.setFormErrors($(form), e.responseJSON.errors);
             });
         })
     })

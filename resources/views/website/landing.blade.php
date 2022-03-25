@@ -32,6 +32,7 @@
   @include('website.withdraw.modal')
   @include('website.profile.modal')
   @include('website.transactions.modal')
+  @include('website.change_password.modal')
 @endauth
 <!-- END MODALS  -->
 
@@ -55,6 +56,20 @@ window.swalSuccess = function (text) {
     },
     buttonsStyling: false
   });
+}
+window.setFormErrors = function ($form, errors) {
+  var formId = $form.attr('id');
+
+  $('#'+formId+' .invalid-feedback.d-block').remove();
+
+  for (var key in errors) {
+    var messages = errors[key];
+    var divs = '';
+    $(messages).each(function (index, message) {
+      divs += '<div class="invalid-feedback d-block">'+message+'</div>'
+    })
+    $(divs).insertAfter('#'+formId+' [name='+key+']')
+  }
 }
 </script>
 @endsection

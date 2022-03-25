@@ -16,7 +16,7 @@ class ProfileController extends Controller
     {
         $payload = $request->validate([
             'username' => ['required'],
-            'email' => ['required'],
+            'email' => ['required', 'email'],
             'phone_number' => ['required'],
         ]);
 

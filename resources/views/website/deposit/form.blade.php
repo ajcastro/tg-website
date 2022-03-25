@@ -109,7 +109,6 @@
             }).done(function(d) {
                 $(form).removeClass('was-validated')
                 $(form).removeClass('invalid')
-                $('#depositModal').hide()
                 form.reset()
                 window.swalSuccess('Deposit is successful!');
                 var modal = bootstrap.Modal.getInstance(document.querySelector('#depositModal'));

@@ -29,6 +29,7 @@
 <!-- INCLUDE MODALS  -->
 @auth
   @include('website.deposit.modal')
+  @include('website.withdraw.modal')
 @endauth
 <!-- END MODALS  -->
 

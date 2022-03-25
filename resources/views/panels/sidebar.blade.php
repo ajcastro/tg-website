@@ -38,7 +38,7 @@ $configData = Helper::applClasses();
       <li class="nav-item">
         <a
           data-bs-toggle="modal"
-          data-bs-target="#depositModal"
+          data-bs-target="#withdrawModal"
           href="javascript:void(0)"
           class="d-flex align-items-center"
         >

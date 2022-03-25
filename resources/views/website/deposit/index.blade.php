@@ -2,24 +2,18 @@
 
 @section('title', 'Deposit')
 
-@include('website.deposit.style')
-@include('website.deposit.script')
+@section('page-script')
+<script>
+  $(function () {
+    $("#depositModal").modal('show');
+  })
+</script>
+@endsection
 
 @section('content')
 <div class="row">
   <div class="col-12">
-    <div class="py-2 d-flex justify-content-end">
-      <button
-        type="button"
-        class="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#depositModal"
-      >
-        Create
-      </button>
-    </div>
+      @include('website.deposit.modal')
   </div>
-  @include('website.deposit.modal')
-  @include('website.deposit.datatable')
 </div>
 @endsection

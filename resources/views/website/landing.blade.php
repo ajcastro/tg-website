@@ -17,9 +17,11 @@
     <x-auth.login-card />
     @endguest
   </div>
-  <div class="col-xs-12">
-    @include('website.landing-page.slider')
-  </div>
+  @guest
+    <div class="col-xs-12">
+      @include('website.landing-page.slider')
+    </div>
+  @endguest
 </div>
 
 @endsection

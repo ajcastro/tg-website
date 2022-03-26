@@ -37,9 +37,11 @@ class Bank extends Model
 
     public static function getBanksOfCurrentWebsite()
     {
-        return static::ofCurrentWebsite()
-            ->orderBy('code')
-            ->get();
+        return memo(__METHOD__, function () {
+            return static::ofCurrentWebsite()
+                ->orderBy('code')
+                ->get();
+        });
     }
 
     public function website()

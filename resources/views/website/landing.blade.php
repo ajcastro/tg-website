@@ -33,6 +33,7 @@
   @include('website.profile.modal')
   @include('website.transactions.modal')
   @include('website.change_password.modal')
+  @include('website.member_bank.modal')
 @endauth
 <!-- END MODALS  -->
 

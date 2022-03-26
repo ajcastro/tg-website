@@ -42,8 +42,25 @@ class CompanyBank extends Model
         'max_amount' => 'integer',
     ];
 
+    public static function getCompanyBanksOfCurrentWebsite($bank_type = null)
+    {
+        return memo([__METHOD__, $bank_type], function () use ($bank_type) {
+            return static::ofCurrentWebsite()
+                ->when($bank_type, function ($query, $bank_type)  {
+                    $query->where('bank_type', $bank_type);
+                })
+                ->orderBy('bank_code')
+                ->get();
+        });
+    }
+
     public function website()
     {
         return $this->belongsTo(Website::class);
+    }
+
+    public function scopeOfCurrentWebsite($query)
+    {
+        $query->where('website_id', Website::getWebsiteId());
     }
 }

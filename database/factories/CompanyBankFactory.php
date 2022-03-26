@@ -25,13 +25,13 @@ class CompanyBankFactory extends Factory
     {
         return [
             'website_id' => Website::factory(),
-            'bank_type' => $this->faker->word,
+            'bank_type' => $this->faker->randomElement(['deposit', 'withdraw']),
             'bank_code' => $this->faker->word,
             'bank_acc_no' => $this->faker->word,
             'bank_acc_name' => $this->faker->word,
             'is_active' => $this->faker->boolean,
             'is_auto_update_balance' => $this->faker->boolean,
-            'bank_factor' => $this->faker->randomFloat(2, 0, 9999999999999.99),
+            'bank_factor' => $this->faker->randomFloat(2, 10, 100),
             'min_amount' => $this->faker->randomNumber(),
             'max_amount' => $this->faker->randomNumber(),
         ];

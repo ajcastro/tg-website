@@ -61,6 +61,7 @@ class Promotion extends Model
     {
         return $this->hasOne(PromotionSetting::class);
     }
+
     public function scopeOfCurrentWebsite($query)
     {
         $query->where('website_id', Website::getWebsiteId());

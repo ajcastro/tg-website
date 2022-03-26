@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Models\Member;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -24,5 +25,15 @@ class ProfileController extends Controller
 
         $member->fill($payload);
         $member->save();
+    }
+
+    public function getCurrentBalance(Request $request)
+    {
+        /** @var Member */
+        $member = $request->user();
+        return [
+            'balance_display' => number_format($member->getCurrentBalance(), 2),
+            'balance' => $member->getCurrentBalance(),
+        ];
     }
 }

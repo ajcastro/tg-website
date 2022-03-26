@@ -11,44 +11,55 @@
 @endpush
 
 <section class="bs-validation">
+    <div id="withdraw-balance-info" class="alert alert-info" role="alert">
+        <div class="alert-body">
+            <table>
+                <tr>
+                    <td class="td-label">Balance</td>
+                    <td class="td-value-balance"> ... </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
     <form id="withdraw-form" class="needs-validation" novalidate enctype="multipart/form-data">
         @csrf
 
         <div class="mb-1">
-            <label class="d-block form-label" for="recipient_bank">Recipient Bank</label>
-            <input
-                type="text"
-                id="recipient_bank"
-                class="form-control"
-                placeholder=""
-                required
-                name="recipient_bank"
-            />
+            <label class="form-label" for="recepient-bank">Recipient Bank</label>
+            <select class="form-select" id="recepient-bank" required name="recipient_bank_id">
+                <option value="">- Select Bank -</option>
+                @foreach (auth()->user()->banks as $bank)
+                    <option value="{{$bank->id}}">{{$bank->account_code}} - {{$bank->account_number}}</option>
+                @endforeach
+            </select>
             <div class="invalid-feedback">Please enter your recipient bank</div>
         </div>
 
         <div class="mb-1">
-            <label class="d-block form-label" for="account_name">Account Name</label>
+            <label class="d-block form-label" for="withdraw-account_name">Account Name</label>
             <input
                 type="text"
-                id="account_name"
+                id="withdraw-account_name"
                 class="form-control"
                 placeholder=""
                 required
                 name="account_name"
+                readonly
             />
             <div class="invalid-feedback">Please enter your account name</div>
         </div>
 
         <div class="mb-1">
-            <label class="d-block form-label" for="account_number">Account Number</label>
+            <label class="d-block form-label" for="withdraw-account_number">Account Number</label>
             <input
                 type="text"
-                id="account_number"
+                id="withdraw-account_number"
                 class="form-control"
                 placeholder=""
                 required
                 name="account_number"
+                readonly
             />
             <div class="invalid-feedback">Please enter your account number</div>
         </div>
@@ -63,7 +74,7 @@
                 required
                 name="amount"
             />
-            <div class="invalid-feedback">Please enter withdraw amount.</div>
+            <div class="invalid-feedback">Please enter withdraw amount within your balance.</div>
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -81,6 +92,33 @@
 <script src="{{ asset(mix('js/scripts/forms/form-validation.js')) }}"></script>
 <script>
     $(function () {
+        $('#withdrawModal').on('shown.bs.modal', function () {
+            $.ajax({
+                url: "/balance",
+                type: 'GET',
+            }).done(function (data) {
+                $('#withdraw-balance-info .td-value-balance').html(data.balance_display);
+                $('#sidebar-balance').html(data.balance_display);
+                $('#withdraw-amount').attr('max', data.balance);
+            });
+
+            $.ajax({
+                url: "/member_banks",
+                type: 'GET',
+            }).done(function (memberBanks) {
+                $('#member-banks-table tbody').html('');
+                $(memberBanks).each(function (index, memberBank) {
+                    $('#member-banks-table tbody').append(
+                        '<tr>'+
+                            '<td>'+memberBank.account_code+'</td>'+
+                            '<td>'+memberBank.account_number+'</td>'+
+                            '<td>'+memberBank.account_name+'</td>'+
+                        '</tr>'
+                    );
+                });
+            });
+        });
+
         $('#withdraw-form').on('submit', function (e) {
             var form = this;
             if (!form.checkValidity()) return;
@@ -103,7 +141,29 @@
                 $(form).removeClass('was-validated')
                 window.setFormErrors($(form), e.responseJSON.errors);
             });
-        })
-    })
+        });
+
+        $('#recepient-bank').on('change', function () {
+            var banks = {!! auth()->user()->banks->toJson() !!};
+            var selectedBankId = $(this).val();
+            var selectedBank = banks.find(function (b) {
+                return b.id == selectedBankId;
+            });
+
+            $('#withdraw-account_number').val(selectedBank.account_number);
+            $('#withdraw-account_name').val(selectedBank.account_name);
+        });
+    });
 </script>
+@endpush
+
+@push('page-style')
+<style>
+#withdraw-balance-info table td.td-label::after {
+    content: ':';
+    float: right;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+</style>
 @endpush

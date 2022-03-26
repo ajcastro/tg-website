@@ -8,8 +8,9 @@ use App\Http\Queries\MemberQuery;
 use App\Models\Contracts\RelatesToWebsite;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Query\Builder as QueryBuilder;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Str;
 
 class Member extends Authenticatable implements RelatesToWebsite
 {
@@ -84,6 +85,7 @@ class Member extends Authenticatable implements RelatesToWebsite
     {
         static::creating(function (Member $member) {
             $member->website_id = Website::getWebsiteId();
+            $member->referral_number = $member->referral_number ?? static::generateReferralCode();
         });
     }
 
@@ -92,6 +94,11 @@ class Member extends Authenticatable implements RelatesToWebsite
         return MemberLog::whereNull('kicked_at')->update([
             'kicked_at' => now(),
         ]);
+    }
+
+    public static function generateReferralCode()
+    {
+        return Website::getWebsiteId().Str::random(8);
     }
 
     public function website()

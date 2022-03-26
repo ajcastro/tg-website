@@ -17,7 +17,7 @@
 <div class="row landing-banner-image-wrapper">
   <div class="col">
   </div>
-  <div class="col-xs-12 col-md-6" style="min-height: 450px;">
+  <div class="col-xs-12 col-md-6" style="min-height: 450px; margin-top: 55px;">
     @guest
     <x-auth.login-card />
     @endguest
@@ -33,6 +33,7 @@
   @include('website.profile.modal')
   @include('website.transactions.modal')
   @include('website.change_password.modal')
+  @include('website.member_bank.modal')
 @endauth
 <!-- END MODALS  -->
 

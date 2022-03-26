@@ -48,7 +48,7 @@
 
 </section>
 
-@section('page-script')
+@push('page-script')
 <script src="https://unpkg.com/swiper@7.4.1/swiper-bundle.min.js"></script>
 
 <script>
@@ -56,10 +56,10 @@
         spaceBetween: 10,
         grabCursor: true,
         loop:true,
-        // autoplay: {
-        //     delay: 5000,
-        //     disableOnInteraction: false,
-        // },
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        },
         pagination: {
             el: ".swiper-pagination",
             clickable: true,
@@ -77,4 +77,4 @@
         },
     });
 </script>
-@endsection
+@endpush

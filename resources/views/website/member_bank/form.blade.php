@@ -50,6 +50,7 @@
                 placeholder=""
                 required
                 name="account_name"
+                readonly
             />
             <div class="invalid-feedback">Please enter your account name</div>
         </div>
@@ -69,6 +70,16 @@
 <script src="{{ asset(mix('js/scripts/forms/form-validation.js')) }}"></script>
 <script>
     $(function () {
+        $('#memberBankModal').on('shown.bs.modal', function () {
+            $.ajax({
+                url: "/member_banks",
+                type: 'GET',
+            }).done(function (memberBanks) {
+                var memberBank = memberBanks[0];
+                $('#member_bank-account_name').val(memberBank.account_name);
+            });
+        });
+
         $('#member-bank-form').on('submit', function (e) {
             var form = this;
             if (!form.checkValidity()) return;

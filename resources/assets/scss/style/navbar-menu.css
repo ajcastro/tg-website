@@ -23,6 +23,27 @@
     /* color: #d4af37; */
 /* } */
 
+.mobileNavView {
+    position: absolute !important;
+    top: 57px;
+    background-color: rgb(22, 29, 49);
+    width: 100%;
+    left: 0px;
+    padding-left: 12px;
+}
+
+#mobileNavBarSvg > svg{
+    transform: scale(1.5);
+}
+
+.display-menu {
+    display: flex !important;
+}
+
+.hide-menu {
+    display: none !important;
+}
+
 .menuitem {
     text-align: left;
     max-width: 250px !important;

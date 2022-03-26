@@ -16,6 +16,7 @@ Route::get('/', [IndexController::class, 'index'])->name('landing');
 Route::post('/deposit', [DepositController::class, 'deposit'])->name('deposit');
 Route::post('/withdraw', [WithdrawController::class, 'withdraw'])->name('withdraw');
 Route::get('/profile', [ProfileController::class, 'getProfile'])->name('profile.get');
+Route::get('/balance', [ProfileController::class, 'getCurrentBalance'])->name('profile.current_balance');
 Route::post('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
 Route::get('/transactions', [TransactionController::class, 'listTransactions'])->name('transactions.list');
 Route::post('/change_password', [ChangePasswordController::class, 'changePassword'])->name('change_password');

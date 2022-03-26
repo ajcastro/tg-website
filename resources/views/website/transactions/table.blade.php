@@ -23,6 +23,11 @@
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td colspan="5" class="text-center">
+                Loading...
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -45,6 +50,13 @@
                 type: 'GET',
             }).done(function (rows) {
                 $('#transactions-table tbody').html('');
+                if (rows.length === 0) {
+                  $('#transactions-table tbody').append(
+                      '<tr>'+
+                          '<td colspan="5" class="text-center"> No transactions record. </td>' +
+                      '</tr>'
+                  );
+                }
                 $(rows).each(function (index, row) {
                     $('#transactions-table tbody').append(
                         '<tr>'+

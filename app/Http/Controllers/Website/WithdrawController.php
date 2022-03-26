@@ -14,11 +14,13 @@ class WithdrawController extends Controller
 {
     public function withdraw(Request $request)
     {
+        $balance = $request->user()->getCurrentBalance();
+
         $request->validate([
             'recipient_bank_id' => ['required', 'exists:member_banks,id'],
             'account_name' => ['required'],
             'account_number' => ['required'],
-            'amount' => ['required', 'numeric', 'gt:0'],
+            'amount' => ['required', 'numeric', 'gt:0', 'max:'.$balance],
         ]);
 
         /** @var Member */

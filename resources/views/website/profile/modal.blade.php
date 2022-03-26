@@ -7,7 +7,7 @@
         aria-hidden="true"
         data-bs-backdrop="static"
     >
-        <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Profile</h4>

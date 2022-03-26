@@ -11,61 +11,46 @@
 @endpush
 
 <section class="bs-validation">
-    <form id="profile-form" class="needs-validation" novalidate enctype="multipart/form-data">
-        @csrf
-
-        <div class="mb-1">
-            <label class="d-block form-label" for="profile-username">Username</label>
-            <input
-                type="text"
-                id="profile-username"
-                class="form-control"
-                placeholder=""
-                required
-                name="username"
-            />
-            <div class="invalid-feedback">Please enter your username</div>
+    <div id="profile-user-info" class="alert alert-info" role="alert">
+        <div class="alert-body">
+            <table>
+                <tr>
+                    <td class="td-label">Username</td>
+                    <td class="td-value-username"></td>
+                </tr>
+                <tr>
+                    <td class="td-label">Referral Code</td>
+                    <td class="td-value-referral_code"></td>
+                </tr>
+            </table>
         </div>
+    </div>
 
-        <div class="mb-1">
-            <label class="d-block form-label" for="profile-email">Email</label>
-            <input
-                type="text"
-                id="profile-email"
-                class="form-control"
-                placeholder=""
-                required
-                name="email"
-            />
-            <div class="invalid-feedback">Please enter your email</div>
-        </div>
-
-        <div class="mb-1">
-            <label class="d-block form-label" for="profile-phone_number">Phone Number</label>
-            <input
-                type="text"
-                id="profile-phone_number"
-                class="form-control"
-                placeholder=""
-                required
-                name="phone_number"
-            />
-            <div class="invalid-feedback">Please enter your phone number</div>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    <div class="table-responsive">
+        <table id="member-banks-table" class="table">
+            <thead>
+                <tr>
+                    <th>Bank</th>
+                    <th>Account Number</th>
+                    <th>Account Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td colspan="5" class="text-center">
+                    Loading...
+                </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </section>
 
 @push('vendor-script')
-<!-- vendor files -->
-<script src="{{ asset(mix('vendors/js/forms/select/select2.full.min.js')) }}"></script>
-<script src="{{ asset(mix('vendors/js/forms/validation/jquery.validate.min.js')) }}"></script>
-<script src="{{ asset(mix('vendors/js/pickers/flatpickr/flatpickr.min.js')) }}"></script>
 @endpush
+
 @push('page-script')
 <!-- Page js files -->
-<script src="{{ asset(mix('js/scripts/forms/form-validation.js')) }}"></script>
 <script>
     $(function () {
         $('#profileModal').on('shown.bs.modal', function () {
@@ -73,36 +58,37 @@
                 url: "/profile",
                 type: 'GET',
             }).done(function (data) {
-                $('#profile-username').val(data.username)
-                $('#profile-email').val(data.email)
-                $('#profile-phone_number').val(data.phone_number)
+                $('#profile-user-info .td-value-username').html(data.username)
+                $('#profile-user-info .td-value-referral_code').html(data.referral_number)
             });
-        });
-
-        $('#profile-form').on('submit', function (e) {
-            $(form).removeClass('was-validated')
-            var form = this;
-            if (!form.checkValidity()) return;
 
             $.ajax({
-                url: "/profile",
-                type: 'POST',
-                data: new FormData(form),
-                processData: false,
-                contentType: false
-            }).done(function(d) {
-                $(form).removeClass('was-validated')
-                $(form).removeClass('invalid')
-                form.reset()
-                window.swalSuccess('Updating profile is successful!');
-                var modal = bootstrap.Modal.getInstance(document.querySelector('#profileModal'));
-                modal.hide();
-                window.setFormErrors($(form), []);
-            }).fail(function (e) {
-                $(form).removeClass('was-validated')
-                window.setFormErrors($(form), e.responseJSON.errors);
+                url: "/member_banks",
+                type: 'GET',
+            }).done(function (memberBanks) {
+                $('#member-banks-table tbody').html('');
+                $(memberBanks).each(function (index, memberBank) {
+                    $('#member-banks-table tbody').append(
+                        '<tr>'+
+                            '<td>'+memberBank.account_code+'</td>'+
+                            '<td>'+memberBank.account_number+'</td>'+
+                            '<td>'+memberBank.account_name+'</td>'+
+                        '</tr>'
+                    );
+                });
             });
-        })
-    })
+        });
+    });
 </script>
+@endpush
+
+@push('page-style')
+<style>
+#profile-user-info table td.td-label::after {
+    content: ':';
+    float: right;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+</style>
 @endpush

@@ -15,40 +15,40 @@
         @csrf
 
         <div class="mb-1">
-            <label class="d-block form-label" for="recipient_bank">Recipient Bank</label>
-            <input
-                type="text"
-                id="recipient_bank"
-                class="form-control"
-                placeholder=""
-                required
-                name="recipient_bank"
-            />
+            <label class="form-label" for="recepient-bank">Recipient Bank</label>
+            <select class="form-select" id="recepient-bank" required name="recipient_bank_id">
+                <option value="">- Select Bank -</option>
+                @foreach (auth()->user()->banks as $bank)
+                    <option value="{{$bank->id}}">{{$bank->account_code}} - {{$bank->account_number}}</option>
+                @endforeach
+            </select>
             <div class="invalid-feedback">Please enter your recipient bank</div>
         </div>
 
         <div class="mb-1">
-            <label class="d-block form-label" for="account_name">Account Name</label>
+            <label class="d-block form-label" for="withdraw-account_name">Account Name</label>
             <input
                 type="text"
-                id="account_name"
+                id="withdraw-account_name"
                 class="form-control"
                 placeholder=""
                 required
                 name="account_name"
+                readonly
             />
             <div class="invalid-feedback">Please enter your account name</div>
         </div>
 
         <div class="mb-1">
-            <label class="d-block form-label" for="account_number">Account Number</label>
+            <label class="d-block form-label" for="withdraw-account_number">Account Number</label>
             <input
                 type="text"
-                id="account_number"
+                id="withdraw-account_number"
                 class="form-control"
                 placeholder=""
                 required
                 name="account_number"
+                readonly
             />
             <div class="invalid-feedback">Please enter your account number</div>
         </div>
@@ -103,7 +103,18 @@
                 $(form).removeClass('was-validated')
                 window.setFormErrors($(form), e.responseJSON.errors);
             });
-        })
-    })
+        });
+
+        $('#recepient-bank').on('change', function () {
+            var banks = {!! auth()->user()->banks->toJson() !!};
+            var selectedBankId = $(this).val();
+            var selectedBank = banks.find(function (b) {
+                return b.id == selectedBankId;
+            });
+
+            $('#withdraw-account_number').val(selectedBank.account_number);
+            $('#withdraw-account_name').val(selectedBank.account_name);
+        });
+    });
 </script>
 @endpush

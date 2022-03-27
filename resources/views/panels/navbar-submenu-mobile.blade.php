@@ -1,13 +1,13 @@
 
 
 @if ((count($menu->children) > 0) AND ($menu->parent_id == 0))
-    <li class="nav-item dropdown d-none d-md-block">
+    <li class="nav-item dropdown d-block mb-1">
         <a href="{{ url($menu->slug) }}" class="nav-link " role="button" data-bs-toggle="dropdown" aria-expanded="false">
             {{ $menu->title }}
         </a>
 
 @else
-    <li class="nav-item d-none d-md-block @if($menu->parent_id === 0 && count($menu->children) > 0) dropdown @endif">
+    <li class="nav-item d-block mb-1 @if($menu->parent_id === 0 && count($menu->children) > 0) dropdown @endif">
         <!-- <a href="{{ url($menu->slug) }}" class="nav-link " data-bs-toggle="dropdown" aria-expanded="false"> -->
         <a href="{{ url($menu->slug) }}" class="nav-link dropdown-item">
 
@@ -18,7 +18,7 @@
         @else
         <div class="menuitem">
             <div class="submenuitem-img">
-                <img src="{{ asset($menu->imgloc) }}" alt="">
+                <img src="{{ asset($menu->imgloc) }}" alt="" style="width:100%;">
             </div>
             <div class="submenuitem-text">
                 {{ $menu->title }}
@@ -31,7 +31,7 @@
 @if (count($menu->children) > 0)
     <ul class="@if($menu->parent_id !== 0 && (count($menu->children) > 0)) submenu @endif dropdown-menu" aria-labelledby="dropdownBtn">
         @foreach($menu->children as $menu)
-            @include('panels.navbar-submenu', $menu)
+            @include('panels.navbar-submenu-mobile', $menu)
         @endforeach
     </ul>
 @endif

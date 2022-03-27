@@ -23,6 +23,27 @@
     /* color: #d4af37; */
 /* } */
 
+.mobileNavView {
+    position: absolute !important;
+    top: 57px;
+    background-color: rgb(22, 29, 49);
+    width: 100%;
+    left: 0px;
+    padding-left: 12px;
+}
+
+#mobileNavBarSvg > svg{
+    transform: scale(1.5);
+}
+
+.display-menu {
+    display: flex !important;
+}
+
+.hide-menu {
+    display: none !important;
+}
+
 .menuitem {
     text-align: left;
     max-width: 250px !important;
@@ -51,6 +72,86 @@
     padding: 5px 5px;
     vertical-align: middle;
     margin-left: 30px;
+}
+
+@media (min-width: 320px) and (max-width: 639px) {
+    .submenuitem-img {
+        display: inline-block;
+        padding: 5px 5px;
+        vertical-align: middle;
+        width: 44px;
+        max-width: 100%;
+        max-height: 80px;
+        text-align: right;
+        margin-right: 0px;
+    }
+
+    .submenuitem-text {
+        display: inline-block;
+        padding: 5px 5px;
+        vertical-align: middle;
+        margin-left: 0px;
+    }
+
+    .dropdown-menu {
+        position:unset !important;
+    }
+
+    .show ~ .dropdown-menu {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+@media (min-width: 640px) and (max-width: 767px) {
+    .submenuitem-img {
+        display: inline-block;
+        padding: 5px 5px;
+        vertical-align: middle;
+        width: 44px;
+        max-width: 100%;
+        max-height: 80px;
+        text-align: right;
+        margin-right: 0px;
+    }
+
+    .submenuitem-text {
+        display: inline-block;
+        padding: 5px 5px;
+        vertical-align: middle;
+        margin-left: 0px;
+    }
+
+    .dropdown-menu {
+        position:unset !important;
+    }
+
+    .show ~ .dropdown-menu {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .submenuitem-img {
+        display: inline-block;
+        padding: 5px 5px;
+        vertical-align: middle;
+        width: 60px;
+        max-width: 100%;
+        max-height: 80px;
+        box-align: right;
+        text-align: right;
+        margin-right: 10px;
+    }
+
+    .submenuitem-text {
+        display: inline-block;
+        padding: 5px 5px;
+        vertical-align: middle;
+        margin-left: 30px;
+    }
 }
 
 /* #menu-btn { */

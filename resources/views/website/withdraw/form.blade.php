@@ -103,6 +103,8 @@
             });
         }
 
+        window.setInterval(updateBalance, 5000);
+
         $('#withdrawModal').on('shown.bs.modal', function () {
             updateBalance();
 

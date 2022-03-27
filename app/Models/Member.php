@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\MemberLevel;
+use App\Enums\MemberTransactionStatus;
 use App\Enums\WarningStatus;
 use App\Http\Queries\MemberQuery;
 use App\Models\Contracts\RelatesToWebsite;
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class Member extends Authenticatable implements RelatesToWebsite
@@ -163,7 +165,11 @@ class Member extends Authenticatable implements RelatesToWebsite
 
     public function getCurrentBalance()
     {
-        return 10000;
+        $balance = $this->transactions()
+            ->where('status', MemberTransactionStatus::APPROVED)
+            ->value(DB::raw('sum(credit_amount-debit_amount)')) ?? 0;
+
+        return $balance;
     }
 
     public function getMemberLevelDisplayAttribute()

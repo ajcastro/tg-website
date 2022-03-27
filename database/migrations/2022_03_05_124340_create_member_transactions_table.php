@@ -28,7 +28,7 @@ class CreateMemberTransactionsTable extends Migration
             $table->decimal('credit_amount', 15, 2)->default(0);
             $table->decimal('debit_amount', 15, 2)->default(0);
             $table->text('remarks')->nullable();
-            $table->tinyInteger('status')->default(0)->comment('0=new transaction, 1=approved, 2=reject, 3=in progress');
+            $table->tinyInteger('status')->default(0)->index()->comment('0=new transaction, 1=approved, 2=reject, 3=in progress');
             $table->string('member_ip')->nullable();
             $table->string('member_info')->nullable();
             $table->string('screenshot_name')->nullable();

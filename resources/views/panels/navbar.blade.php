@@ -56,7 +56,7 @@
     </ul>
     @endif
     <ul class="nav navbar-nav bookmark-icons">
-      <li class="nav-item d-none d-lg-block">
+      <li class="nav-item">
         <a class="navbar-brand" href="/">TELE<span>GAMING</span></a>
       </li>
     </ul>

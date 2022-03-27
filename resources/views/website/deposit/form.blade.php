@@ -15,27 +15,56 @@
         @csrf
         <div class="mb-1">
             <label class="form-label" for="bank-sender">Bank Sender</label>
+            <a data-bs-toggle="modal"
+                data-bs-target="#memberBankModal"
+                href="javascript:void(0)"
+                class="ms-1">
+                <span>{{__('Add Bank')}}</span>
+            </a>
             <select class="form-select" id="bank-sender" required name="account_sender_id">
                 <option value="">- Select Bank -</option>
                 @foreach (auth()->user()->banks as $bank)
-                    <option value="{{$bank->id}}">{{$bank->account_code}}</option>
+                    <option value="{{$bank->id}}">{{$bank->account_code}} - {{$bank->account_number}}</option>
                 @endforeach
             </select>
             <div class="invalid-feedback">Please select bank sender</div>
         </div>
 
         @php
-        $banks = \App\Models\Bank::getBanksOfCurrentWebsite();
+        $companyBanks = \App\Models\CompanyBank::getCompanyBanksOfCurrentWebsite('deposit');
         @endphp
         <div class="mb-1">
             <label class="form-label" for="bank-destination">Bank Destination</label>
             <select class="form-select" id="bank-destination" required name="bank_destination_id">
                 <option value="">- Select Bank -</option>
-                @foreach ($banks as $bank)
-                    <option value="{{$bank->id}}">{{$bank->code}}</option>
+                @foreach ($companyBanks as $companyBank)
+                    <option value="{{$companyBank->id}}">{{$companyBank->bank_code}}</option>
                 @endforeach
             </select>
             <div class="invalid-feedback">Please select bank destination</div>
+        </div>
+
+        <div id="bank-destination-info" class="alert alert-warning d-none" role="alert">
+            <div class="alert-body">
+                <table>
+                    <tr>
+                        <td class="td-label">Account Number</td>
+                        <td class="td-value-account-number"></td>
+                    </tr>
+                    <tr>
+                        <td class="td-label">Account Name</td>
+                        <td class="td-value-account-name"></td>
+                    </tr>
+                    <tr>
+                        <td class="td-label">Min</td>
+                        <td class="td-value-min"></td>
+                    </tr>
+                    <tr>
+                        <td class="td-label">Max</td>
+                        <td class="td-value-max"></td>
+                    </tr>
+                </table>
+            </div>
         </div>
 
         <div class="mb-1">
@@ -48,7 +77,7 @@
                 required
                 name="total_deposit"
             />
-            <div class="invalid-feedback">Please enter your total deposit.</div>
+            <div class="invalid-feedback">Please enter amount within the range.</div>
         </div>
 
         <div class="mb-1">
@@ -77,7 +106,7 @@
 
         <div class="mb-1">
             <label for="screenshot-deposit" class="form-label">Proof Deposit</label>
-            <input class="form-control" type="file" id="screenshot-deposit" required name="screenshot" />
+            <input class="form-control" type="file" id="screenshot-deposit" name="screenshot" />
             <div class="invalid-feedback">Please upload your proof of deposit</div>
         </div>
 
@@ -114,11 +143,60 @@
                 var modal = bootstrap.Modal.getInstance(document.querySelector('#depositModal'));
                 modal.hide();
                 window.setFormErrors($(form), []);
+                $('#bank-destination-info').addClass('d-none');
             }).fail(function (e) {
                 $(form).removeClass('was-validated')
                 window.setFormErrors($(form), e.responseJSON.errors);
             });
-        })
+        });
+
+        $('#deposit-form').on('member_bank_added', function (e, memberBank) {
+            $('#bank-sender').append(
+                '<option value="'+memberBank.id+'">' +memberBank.account_code +' - '+ memberBank.account_number+
+                '</option>'
+            );
+        });
+
+        $('#bank-destination').on('change', function () {
+            var selectedCompanyBankId = $(this).val();
+            var companyBanks = {!! $companyBanks->toJson() !!};
+            var selectedCompanyBank = companyBanks.find(function (cb) {
+                return cb.id == selectedCompanyBankId;
+            });
+
+            if (selectedCompanyBank) {
+                $('#bank-destination-info').removeClass('d-none');
+                $('#bank-destination-info .td-value-account-number').html(selectedCompanyBank.bank_acc_no);
+                $('#bank-destination-info .td-value-account-name').html(selectedCompanyBank.bank_acc_name);
+                $('#bank-destination-info .td-value-min').html(selectedCompanyBank.min_amount);
+                $('#bank-destination-info .td-value-max').html(selectedCompanyBank.max_amount);
+                $('#total-deposit').attr('min', selectedCompanyBank.min_amount);
+                $('#total-deposit').attr('max', selectedCompanyBank.max_amount);
+            } else {
+                $('#bank-destination-info').addClass('d-none');
+            }
+        });
+
+        $('#bank-sender').on('change', function () {
+            var banks = {!! auth()->user()->banks->toJson() !!};
+            var selectedBankId = $(this).val();
+            var selectedBank = banks.find(function (b) {
+                return b.id == selectedBankId;
+            });
+
+            $('#description').val(selectedBank.account_name+' / '+selectedBank.account_number);
+        });
     })
 </script>
+@endpush
+
+@push('page-style')
+<style>
+#bank-destination-info table td.td-label::after {
+    content: ':';
+    float: right;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+</style>
 @endpush

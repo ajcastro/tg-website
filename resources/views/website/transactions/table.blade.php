@@ -11,26 +11,26 @@
 @endpush
 
 <section class="">
-    <div class="table-responsive">
-        <table id="transactions-table" class="table">
-          <thead>
-            <tr>
-              <th>Ticket ID</th>
-              <th>Date</th>
-              <th>Type</th>
-              <th>Amount</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td colspan="5" class="text-center">
-                Loading...
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <div class="table-responsive">
+    <table id="transactions-table" class="table">
+      <thead>
+        <tr>
+          <th>Ticket ID</th>
+          <th>Date</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="5" class="text-center">
+            Loading...
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </section>
 
 @push('vendor-script')

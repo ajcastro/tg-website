@@ -20,7 +20,7 @@ $configData = Helper::applClasses();
       <li class="navigation-header user-info">
         <span>
           <div>{{ auth()->user()->username }}</div>
-          <div>{{__('Balance')}}: {{number_format(auth()->user()->getCurrentBalance(), 2)}}</div>
+          <div>{{__('Balance')}}: <span id="sidebar-balance">{{number_format(auth()->user()->getCurrentBalance(), 2)}}</span></div>
         </span>
         <i data-feather="more-horizontal"></i>
       </li>

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Client;
 use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -16,8 +17,7 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'parent_group_id' => 1,
-            'role_id' => Role::ADMINISTRATOR_ID,
+            'client_id' => Client::DEFAULT_ID,
             'username' => 'a'.Str::random(10).$this->faker->unique()->safeEmail(),
             'name' => $this->faker->name(),
             'email' => 'a'.Str::random(10).$this->faker->unique()->safeEmail(),

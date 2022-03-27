@@ -106,7 +106,7 @@
 
         <div class="mb-1">
             <label for="screenshot-deposit" class="form-label">Proof Deposit</label>
-            <input class="form-control" type="file" id="screenshot-deposit" required name="screenshot" />
+            <input class="form-control" type="file" id="screenshot-deposit" name="screenshot" />
             <div class="invalid-feedback">Please upload your proof of deposit</div>
         </div>
 

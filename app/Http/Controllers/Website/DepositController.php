@@ -21,7 +21,7 @@ class DepositController extends Controller
             'total_deposit' => ['required', 'numeric', 'gt:0'],
             'description' => ['required'],
             'promotion_id' => ['nullable', 'exists:promotions,id'],
-            'screenshot' => ['required', 'file'],
+            'screenshot' => ['nullable', 'file'],
         ]);
 
         $websiteId = Website::getWebsiteId();
@@ -46,8 +46,12 @@ class DepositController extends Controller
             'remarks' => $request->description,
             'member_ip' => $request->ip(),
             'member_info' => agent_member_info(),
-            'screenshot_name' => $request->file('screenshot')->getClientOriginalName(),
-            'screenshot_path' => $request->file('screenshot')->store("website/{$websiteId}/images"),
+            'screenshot_name' => $request->hasFile('screenshot')
+                ? $request->file('screenshot')->getClientOriginalName()
+                : null,
+            'screenshot_path' => $request->hasFile('screenshot')
+                ? $request->file('screenshot')->store("website/{$websiteId}/images")
+                : null,
         ]);
 
         $member->transactions()->save($transaction);

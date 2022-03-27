@@ -92,7 +92,7 @@
 <script src="{{ asset(mix('js/scripts/forms/form-validation.js')) }}"></script>
 <script>
     $(function () {
-        $('#withdrawModal').on('shown.bs.modal', function () {
+        function updateBalance() {
             $.ajax({
                 url: "/balance",
                 type: 'GET',
@@ -101,6 +101,10 @@
                 $('#sidebar-balance').html(data.balance_display);
                 $('#withdraw-amount').attr('max', data.balance);
             });
+        }
+
+        $('#withdrawModal').on('shown.bs.modal', function () {
+            updateBalance();
 
             $.ajax({
                 url: "/member_banks",
@@ -137,6 +141,7 @@
                 var modal = bootstrap.Modal.getInstance(document.querySelector('#withdrawModal'));
                 modal.hide();
                 window.setFormErrors($(form), []);
+                updateBalance();
             }).fail(function (e) {
                 $(form).removeClass('was-validated')
                 window.setFormErrors($(form), e.responseJSON.errors);

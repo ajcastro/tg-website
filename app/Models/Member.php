@@ -165,11 +165,14 @@ class Member extends Authenticatable implements RelatesToWebsite
 
     public function getCurrentBalance()
     {
-        $balance = $this->transactions()
+        $credit = $this->transactions()
             ->where('status', MemberTransactionStatus::APPROVED)
-            ->value(DB::raw('sum(credit_amount-debit_amount)')) ?? 0;
+            ->value(DB::raw('sum(credit_amount)')) ?? 0;
 
-        return $balance;
+        $debit = $this->transactions()
+            ->value(DB::raw('sum(debit_amount)')) ?? 0;
+
+        return $credit - $debit;
     }
 
     public function getMemberLevelDisplayAttribute()

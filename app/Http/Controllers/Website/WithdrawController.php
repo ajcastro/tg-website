@@ -43,5 +43,6 @@ class WithdrawController extends Controller
         ]);
 
         $member->transactions()->save($transaction);
+        $member->decrementBalanceAmount($transaction->amount);
     }
 }

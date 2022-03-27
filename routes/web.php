@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [IndexController::class, 'index'])->name('landing');
 
+// TODO: wrap in auth middleware
 Route::post('/deposit', [DepositController::class, 'deposit'])->name('deposit');
 Route::post('/withdraw', [WithdrawController::class, 'withdraw'])->name('withdraw');
 Route::get('/profile', [ProfileController::class, 'getProfile'])->name('profile.get');

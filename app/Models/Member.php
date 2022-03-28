@@ -163,6 +163,11 @@ class Member extends Authenticatable implements RelatesToWebsite
         $query->where('website_id', $website->id);
     }
 
+    public function isNewMember()
+    {
+        return $this->is_new_member;
+    }
+
     public function incrementBalanceAmount($amount)
     {
         static::where('id', $this->id)

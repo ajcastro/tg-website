@@ -40,9 +40,11 @@ class Promotion extends Model
         'is_active' => 'boolean',
     ];
 
-    public static function getPromotionsOfCurrentWebsite()
+    public static function getPromotionsOfCurrentWebsite(Member $member)
     {
         return static::ofCurrentWebsite()
+            ->availableFor($member)
+            ->notExpired()
             ->orderBy('sort_order')
             ->get();
     }
@@ -65,6 +67,27 @@ class Promotion extends Model
     public function scopeOfCurrentWebsite($query)
     {
         $query->where('website_id', Website::getWebsiteId());
+    }
+
+    public function scopeAvailableFor($query, Member $member)
+    {
+        $query->whereHas('setting', function ($query) use ($member) {
+            $query->where('is_active', 1);
+            $query->where(function ($query) use ($member) {
+                $query->where('is_for_new_member_only', 0);
+                if ($member->isNewMember()) {
+                    $query->orWhere('is_for_new_member_only', 1);
+                }
+            });
+        });
+    }
+
+    public function scopeNotExpired($query)
+    {
+        $query->whereHas('setting', function ($query) {
+            $now = now()->format('Y-m-d H:i:s');
+            $query->whereRaw("('{$now}' between promotion_settings.valid_from and promotion_settings.valid_thru)");
+        });
     }
 
     public function shouldIncludeBonusToCalculateObligation()

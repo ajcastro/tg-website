@@ -97,7 +97,7 @@
             <label class="form-label" for="bonus">Bonus</label>
             <select class="form-select" id="bonus" name="promotion_id">
                 <option value="">- Select Bonus -</option>
-                @foreach (\App\Models\Promotion::getPromotionsOfCurrentWebsite() as $promo)
+                @foreach (\App\Models\Promotion::getPromotionsOfCurrentWebsite(auth()->user()) as $promo)
                     <option value="{{$promo->id}}">{{ $promo->title }}</option>
                 @endforeach
             </select>

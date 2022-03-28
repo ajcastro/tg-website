@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property PromotionSetting $setting
+ */
 class Promotion extends Model
 {
     use HasFactory;
@@ -131,5 +134,10 @@ class Promotion extends Model
     public function isAutoRelease()
     {
         return $this->setting->is_auto_release;
+    }
+
+    public function isPromotionType($promotion_type)
+    {
+        return $this->setting->promotion_type === $promotion_type;
     }
 }

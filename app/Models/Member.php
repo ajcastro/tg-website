@@ -7,6 +7,7 @@ use App\Enums\MemberTransactionStatus;
 use App\Enums\WarningStatus;
 use App\Http\Queries\MemberQuery;
 use App\Models\Contracts\RelatesToWebsite;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Query\Builder as QueryBuilder;
@@ -240,5 +241,31 @@ class Member extends Authenticatable implements RelatesToWebsite
         $this->suspended_by_id = null;
         $this->suspended_reason = null;
         $this->save();
+    }
+
+    public function countPromoUsage(Promotion $promotion)
+    {
+        return $this->memberPromotions()->where('member_promotions.promotion_id', $promotion->id)->count();
+    }
+
+    public function countPromoUsageForTheDay(Promotion $promotion, Carbon $date)
+    {
+        return $this->memberPromotions()->where('member_promotions.promotion_id', $promotion->id)
+            ->whereDate('deposit_date', $date->format('Y-m-d'))
+            ->count();
+    }
+
+    public function countPromoUsageForTheWeek(Promotion $promotion, Carbon $date)
+    {
+        return $this->memberPromotions()->where('member_promotions.promotion_id', $promotion->id)
+            ->whereRaw('WEEK(deposit_date)', $date->weekOfYear)
+            ->count();
+    }
+
+    public function countPromoUsageForTheMonth(Promotion $promotion, Carbon $date)
+    {
+        return $this->memberPromotions()->where('member_promotions.promotion_id', $promotion->id)
+            ->whereRaw('MONTH(deposit_date)', $date->month)
+            ->count();
     }
 }

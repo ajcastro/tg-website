@@ -12,30 +12,35 @@ use App\Models\MemberPromotion;
 use App\Models\MemberTransaction;
 use App\Models\Promotion;
 use App\Models\Website;
+use App\Rules\Promotions\ValidatePromotionType;
 use Illuminate\Http\Request;
 
 class DepositController extends Controller
 {
     public function deposit(Request $request)
     {
-        $request->validate([
-            'account_sender_id' => ['required'],
-            'bank_destination_id' => ['required', 'exists:company_banks,id'],
-            'total_deposit' => ['required', 'numeric', 'gt:0'],
-            'description' => ['required'],
-            'promotion_id' => ['nullable', 'exists:promotions,id'],
-            'screenshot' => ['nullable', 'file'],
-        ]);
-
         $websiteId = Website::getWebsiteId();
         /** @var Member */
         $member = $request->user();
         /** @var CompanyBank */
         $companyBank = CompanyBank::find($request->bank_destination_id);
         /** @var Promotion */
-        $promotion = Promotion::find($request->promotion_id);
+        $promotion = Promotion::with('setting')->find($request->promotion_id);
         /** @var MemberBank */
         $memberBank = $member->banks()->find($request->account_sender_id);
+
+        $request->validate([
+            'account_sender_id' => ['required'],
+            'bank_destination_id' => ['required', 'exists:company_banks,id'],
+            'total_deposit' => ['required', 'numeric', 'gt:0'],
+            'description' => ['required'],
+            'screenshot' => ['nullable', 'file'],
+            'promotion_id' => [
+                'nullable',
+                'exists:promotions,id',
+                $promotion ? new ValidatePromotionType($member, $promotion) : [],
+            ],
+        ]);
 
         $transaction = MemberTransaction::make([
             'type' => 'deposit',

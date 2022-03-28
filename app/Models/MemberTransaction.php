@@ -77,7 +77,7 @@ class MemberTransaction extends Model implements RelatesToWebsite
     public static function getNextSequence($type, $website_id)
     {
         return static::where(['type' => $type, 'website_id' => $website_id])
-            ->orderByDesc('created_at')
+            ->orderByDesc('sequence')
             ->value('sequence')+1;
     }
 

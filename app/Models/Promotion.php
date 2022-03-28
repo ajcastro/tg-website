@@ -119,11 +119,11 @@ class Promotion extends Model
 
     public function calculateObligationAmount($deposit)
     {
-        if ($this->shouldIncludeBonusToCalculateObligation()) {
-            return ($deposit + $this->calculateBonusAmount($deposit)) * $this->turn_over_obligation;
-        }
+        $amount = $this->shouldIncludeBonusToCalculateObligation()
+            ? $deposit + $this->calculateBonusAmount($deposit)
+            : $deposit;
 
-        return $deposit * $this->turn_over_obligation;
+        return $amount * $this->setting->turn_over_obligation;
     }
 
     public function isGivenOnDeposit()

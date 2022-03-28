@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Website;
+
+use App\Enums\MemberTransactionStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Bank;
 use App\Models\CompanyBank;
 use App\Models\Member;
+use App\Models\MemberBank;
 use App\Models\MemberPromotion;
 use App\Models\MemberTransaction;
 use App\Models\Promotion;
@@ -68,6 +71,41 @@ class DepositController extends Controller
             ]);
 
             $member->memberPromotions()->save($memberPromotion);
+
+            if ($promotion->isGivenOnDeposit() && $promotion->isAutoRelease()) {
+                $this->autoCreditPromotionBonus($request, $member, $companyBank, $memberBank, $promotion, $memberPromotion);
+            }
         }
+    }
+
+    private function autoCreditPromotionBonus(
+        Request $request,
+        Member $member,
+        CompanyBank $companyBank,
+        MemberBank $memberBank,
+        Promotion $promotion,
+        MemberPromotion $memberPromotion
+    ) {
+        if (!$promotion->isAutoRelease()) {
+            return;
+        }
+
+        $transaction = MemberTransaction::make([
+            'type' => 'deposit',
+            'is_adjustment' => 0,
+            'account_code' => $memberBank->account_code,
+            'account_name' => $memberBank->account_name,
+            'account_number' => $memberBank->account_number,
+            'company_bank' => $companyBank->bank_code,
+            'company_bank_factor' => $companyBank->bank_factor,
+            'amount' => $memberPromotion->bonus_amount,
+            'remarks' => '',
+            'member_ip' => $request->ip(),
+            'member_info' => agent_member_info(),
+            'status' => MemberTransactionStatus::APPROVED,
+        ]);
+
+        $member->transactions()->save($transaction);
+        $member->incrementBalanceAmount($memberPromotion->bonus_amount);
     }
 }

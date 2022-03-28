@@ -45,6 +45,7 @@ class PromotionSetting extends Model
         'valid_from' => 'datetime',
         'valid_thru' => 'datetime',
         'is_for_new_member_only' => 'boolean',
+        'given_method' => 'integer',
         'promotion_type' => 'integer',
         'allowed_n_times' => 'integer',
         'calculation_type' => 'integer',

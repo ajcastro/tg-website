@@ -12,6 +12,9 @@ class Promotion extends Model
     const CALCULATION_TYPE_FIX_AMOUNT = 0;
     const CALCULATION_TYPE_PERCENTAGE = 1;
 
+    const GIVEN_ON_DEPOSIT = 0;
+    const GIVEN_AFTER_TURNOVER_REACHED = 1;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -71,8 +74,9 @@ class Promotion extends Model
 
     public function scopeAvailableFor($query, Member $member)
     {
+        $query->where('is_active', 1);
         $query->whereHas('setting', function ($query) use ($member) {
-            $query->where('is_active', 1);
+
             $query->where(function ($query) use ($member) {
                 $query->where('is_for_new_member_only', 0);
                 if ($member->isNewMember()) {
@@ -98,11 +102,11 @@ class Promotion extends Model
     public function calculateBonusAmount($deposit)
     {
         if ($this->setting->calculation_type === static::CALCULATION_TYPE_FIX_AMOUNT) {
-            return $this->calculation_fix_amount;
+            return $this->setting->calculation_fix_amount;
         }
 
         if ($this->setting->calculation_type === static::CALCULATION_TYPE_PERCENTAGE) {
-            return $deposit * $this->calculation_rate;
+            return $deposit * $this->setting->calculation_rate;
         }
 
         return 0;
@@ -115,5 +119,15 @@ class Promotion extends Model
         }
 
         return $deposit * $this->turn_over_obligation;
+    }
+
+    public function isGivenOnDeposit()
+    {
+        return $this->setting->given_method === static::GIVEN_ON_DEPOSIT;
+    }
+
+    public function isAutoRelease()
+    {
+        return $this->setting->is_auto_release;
     }
 }

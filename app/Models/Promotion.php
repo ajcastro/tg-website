@@ -45,7 +45,9 @@ class Promotion extends Model
 
     public static function getPromotionsOfCurrentWebsite(Member $member)
     {
-        return static::ofCurrentWebsite()
+        return static::query()
+            ->with('setting')
+            ->ofCurrentWebsite()
             ->availableFor($member)
             ->notExpired()
             ->orderBy('sort_order')

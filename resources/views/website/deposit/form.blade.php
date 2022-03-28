@@ -97,7 +97,13 @@
             <label class="form-label" for="bonus">Bonus</label>
             <select class="form-select" id="bonus" name="promotion_id">
                 <option value="">- Select Bonus -</option>
-                @foreach (\App\Models\Promotion::getPromotionsOfCurrentWebsite(auth()->user()) as $promo)
+                @php
+                    $promotions = \App\Models\Promotion::getPromotionsOfCurrentWebsite(auth()->user());
+                @endphp
+                @foreach ($promotions->filter(function ($promotion) {
+                    return empty($promotion->setting->min_deposit)
+                        || $promotion->setting->min_deposit <= 0;
+                }) as $promo)
                     <option value="{{$promo->id}}">{{ $promo->title }}</option>
                 @endforeach
             </select>
@@ -125,6 +131,22 @@
 <script src="{{ asset(mix('js/scripts/forms/form-validation.js')) }}"></script>
 <script>
     $(function () {
+        function filterBonusDropdown(amount) {
+            var promotions = {!! $promotions->toJson() !!};
+            return promotions.filter(function (promotion) {
+                return parseFloat(amount) >= parseFloat(promotion.setting.min_deposit);
+            });
+        }
+
+        function updateBonusDropdown(promotions) {
+            $('#bonus').html('<option value="">- Select Bonus -</option>');
+            $(promotions).each(function (index, promotion) {
+                $('#bonus').append(
+                    '<option value="'+promotion.id+'">' + promotion.title +'</option>'
+                );
+            });
+        }
+
         $('#deposit-form').on('submit', function (e) {
             var form = this;
             if (!form.checkValidity()) return;
@@ -185,6 +207,12 @@
             });
 
             $('#description').val(selectedBank.account_name+' / '+selectedBank.account_number);
+        });
+
+        $('#total-deposit').on('input', function () {
+            const amount = $(this).val()
+            var promotions = filterBonusDropdown(amount);
+            updateBonusDropdown(promotions);
         });
     })
 </script>

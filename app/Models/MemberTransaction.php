@@ -72,6 +72,18 @@ class MemberTransaction extends Model implements RelatesToWebsite
             $transaction->website_id = $transaction->website_id ?? Website::getWebsiteId();
             $transaction->sequence = static::getNextSequence($transaction->type, $transaction->website_id);
         });
+
+        static::saving(function (MemberTransaction $transaction) {
+            if ($transaction->status === MemberTransactionStatus::APPROVED) {
+                $transaction->approved_by_id = $transaction->approved_by_id ?? User::ADMIN_ID;
+            }
+        });
+
+        static::saving(function (MemberTransaction $transaction) {
+            if ($transaction->isDeposit()) {
+                $transaction->credit_amount = bcmul($transaction->amount, $transaction->company_bank_factor);
+            }
+        });
     }
 
     public static function getNextSequence($type, $website_id)
@@ -153,17 +165,6 @@ class MemberTransaction extends Model implements RelatesToWebsite
         return static::parseToTicketId($this->type, $this->website_id, $this->sequence);
     }
 
-    public function setAmountAttribute($amount)
-    {
-        $this->attributes['amount'] = $amount;
-
-        if ($this->type === 'deposit') {
-            $this->attributes['credit_amount'] = $amount;
-        } else {
-            $this->attributes['debit_amount'] = $amount;
-        }
-    }
-
     public function getStatusDisplayAttribute()
     {
         if ($this->status === MemberTransactionStatus::NEW) {
@@ -181,6 +182,16 @@ class MemberTransaction extends Model implements RelatesToWebsite
         if ($this->status === MemberTransactionStatus::IN_PROGRESS) {
             return 'In-progress';
         }
+    }
+
+    public function isDeposit()
+    {
+        return $this->type === 'deposit';
+    }
+
+    public function isWithdraw()
+    {
+        return $this->type === 'withdraw';
     }
 
     public function approve($user)

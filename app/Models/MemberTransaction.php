@@ -182,6 +182,10 @@ class MemberTransaction extends Model implements RelatesToWebsite
         if ($this->status === MemberTransactionStatus::IN_PROGRESS) {
             return 'In-progress';
         }
+
+        if ($this->status === MemberTransactionStatus::CANCELED) {
+            return 'Canceled';
+        }
     }
 
     public function isDeposit()

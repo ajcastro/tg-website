@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\MemberPromotionFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,6 +19,7 @@ class MemberPromotion extends Model
         'website_id',
         'member_id',
         'promotion_id',
+        'member_transaction_id',
         'deposit_date',
         'expire_date',
         'deposit_amount',
@@ -36,6 +38,7 @@ class MemberPromotion extends Model
         'website_id' => 'integer',
         'member_id' => 'integer',
         'promotion_id' => 'integer',
+        'member_transaction_id' => 'integer',
         'deposit_date' => 'timestamp',
         'deposit_amount' => 'decimal:2',
         'bonus_amount' => 'decimal:2',
@@ -64,5 +67,10 @@ class MemberPromotion extends Model
     public function promotion()
     {
         return $this->belongsTo(Promotion::class);
+    }
+
+    public function memberTransaction()
+    {
+        return $this->belongsTo(MemberTransaction::class);
     }
 }

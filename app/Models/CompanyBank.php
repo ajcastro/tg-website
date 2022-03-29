@@ -46,6 +46,7 @@ class CompanyBank extends Model
     {
         return memo([__METHOD__, $bank_type], function () use ($bank_type) {
             return static::ofCurrentWebsite()
+                ->where('is_active', 1)
                 ->when($bank_type, function ($query, $bank_type)  {
                     $query->where('bank_type', $bank_type);
                 })

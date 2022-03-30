@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @property PromotionSetting $setting
@@ -46,12 +47,14 @@ class Promotion extends Model
         'is_active' => 'boolean',
     ];
 
-    public static function getPromotionsOfCurrentWebsite(Member $member)
+    public static function getPromotionsOfCurrentWebsite(?Member $member = null)
     {
         return static::query()
             ->with('setting')
             ->ofCurrentWebsite()
-            ->availableFor($member)
+            ->when($member, function ($query, $member) {
+                $query->availableFor($member);
+            })
             ->notExpired()
             ->orderBy('sort_order')
             ->get();
@@ -97,6 +100,32 @@ class Promotion extends Model
             $now = now()->format('Y-m-d H:i:s');
             $query->whereRaw("('{$now}' between promotion_settings.valid_from and promotion_settings.valid_thru)");
         });
+    }
+
+    public function getImagePlaceholderUrl()
+    {
+        return url('img/promotion-placeholder-image.png');
+    }
+
+    public function getImageUrlAttribute()
+    {
+        /** @var \Illuminate\Filesystem\FilesystemAdapter */
+        $storage = Storage::disk('public');
+
+        return $this->image
+            ? $storage->url($this->image)
+            : $this->getImagePlaceholderUrl();
+    }
+
+    public function getImageThumbUrlAttribute()
+    {
+        /** @var \Illuminate\Filesystem\FilesystemAdapter */
+        $storage = Storage::disk('public');
+
+        // TODO: replace with image_thumb
+        return $this->image
+            ? $storage->url($this->image)
+            : $this->getImagePlaceholderUrl();
     }
 
     public function shouldIncludeBonusToCalculateObligation()

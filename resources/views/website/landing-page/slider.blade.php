@@ -1,47 +1,15 @@
 <section class="banner" id="banner" style="margin: 0px 8vw;">
     <div class="swiper banner-slider">
         <div class="swiper-wrapper slide-wrapper">
+
+        @foreach (\App\Models\Promotion::getPromotionsOfCurrentWebsite(auth()->user()) as $promotion)
             <div class="swiper-slide slide">
-            <div class="image">
-                <img src="tstimg/1.jpg" alt="" />
+                <div class="image">
+                    <img src="{{ $promotion->getImageUrlAttribute() }}" alt="{{ $promotion->title }}" />
+                </div>
             </div>
-        </div>
+        @endforeach
 
-        <div class="swiper-slide slide">
-            <div class="image">
-                <img src="tstimg/2.jpg" alt="" />
-            </div>
-        </div>
-
-        <div class="swiper-slide slide">
-            <div class="image">
-                <img src="tstimg/3.jpg" alt="" />
-            </div>
-        </div>
-
-        <div class="swiper-slide slide">
-            <div class="image">
-                <img src="tstimg/4.jpg" alt="" />
-            </div>
-        </div>
-
-        <div class="swiper-slide slide">
-            <div class="image">
-                <img src="tstimg/5.jpg" alt="" />
-            </div>
-        </div>
-
-        <div class="swiper-slide slide">
-            <div class="image">
-                <img src="tstimg/6.jpg" alt="" />
-            </div>
-        </div>
-
-        <div class="swiper-slide slide">
-            <div class="image">
-                <img src="tstimg/7.jpg" alt="" />
-            </div>
-        </div>
     </div>
 
     <div class="swiper-pagination"></div>

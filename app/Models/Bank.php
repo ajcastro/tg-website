@@ -31,26 +31,29 @@ class Bank extends Model
         'id' => 'integer',
         'website_id' => 'integer',
         'is_active' => 'boolean',
-        'is_require_account_no' => 'boolean',
+    ];
+
+    protected $appends = [
+        'is_require_account_no',
     ];
 
 
     public static function getBanksOfCurrentWebsite()
     {
         return memo(__METHOD__, function () {
-            return static::ofCurrentWebsite()
+            return static::query()
                 ->orderBy('code')
                 ->get();
         });
     }
 
-    public function website()
+    public function bankGroup()
     {
-        return $this->belongsTo(Website::class);
+        return $this->belongsTo(BankGroup::class, 'bank_group_id');
     }
 
-    public function scopeOfCurrentWebsite($query)
+    public function getIsRequireAccountNoAttribute()
     {
-        $query->where('website_id', Website::getWebsiteId());
+        return $this->bankGroup->is_require_account_no ?? false;
     }
 }

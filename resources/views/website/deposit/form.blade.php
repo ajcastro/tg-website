@@ -140,6 +140,7 @@
 
         function updateBonusDropdown(promotions) {
             $('#bonus').html('<option value="">- Select Bonus -</option>');
+            $('#bonus').append('<option value="">No Bonus</option>');
             $(promotions).each(function (index, promotion) {
                 $('#bonus').append(
                     '<option value="'+promotion.id+'">' + promotion.title +'</option>'

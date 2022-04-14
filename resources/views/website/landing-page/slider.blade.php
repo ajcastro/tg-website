@@ -2,7 +2,7 @@
     <div class="swiper banner-slider">
         <div class="swiper-wrapper slide-wrapper">
 
-        @foreach (\App\Models\Promotion::getPromotionsOfCurrentWebsite(auth()->user()) as $promotion)
+        @foreach (\App\Models\Promotion::getPromotionsForBanner(auth()->user()) as $promotion)
             <div class="swiper-slide slide">
                 <div class="image">
                     <img src="{{ $promotion->getImageUrlAttribute() }}" alt="{{ $promotion->title }}" />

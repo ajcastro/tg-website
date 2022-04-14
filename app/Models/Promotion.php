@@ -60,6 +60,22 @@ class Promotion extends Model
             ->get();
     }
 
+    public static function getPromotionsForBanner(?Member $member = null)
+    {
+        return static::query()
+            ->with('setting')
+            ->whereHas('setting', function ($query) {
+                $query->where('is_shown_in_banner', 1);
+            })
+            ->ofCurrentWebsite()
+            ->when($member, function ($query, $member) {
+                $query->availableFor($member);
+            })
+            ->notExpired()
+            ->orderBy('sort_order')
+            ->get();
+    }
+
     public function website()
     {
         return $this->belongsTo(Website::class);

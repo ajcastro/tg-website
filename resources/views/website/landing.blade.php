@@ -18,10 +18,16 @@
   @php
     $running_text_announcement = \App\Models\Website::getCurrentWebsite()->setting->running_text_announcement;
   @endphp
-
+  <div class="col-xs-12 col-sm-5 col-md-3 p-0"  style="margin-top: 23px;">
+    <div class="alert w-100" role="alert" style="background-color: #000; border-radius: 0px; color: #fff;">
+      <div id="realtime-clock" class="alert-body text-center">
+        {{ $running_text_announcement }}
+      </div>
+    </div>
+  </div>
   @if ($running_text_announcement)
-  <div class="col-12"  style="padding-left: 0px; padding-right: 0px;">
-    <marquee class="alert w-100" role="alert" style="background-color: #283046; border-radius: 0px; margin-top: 67px; color: #fff;">
+  <div class="col-xs-12 col-sm-7 col-md-9 p-0"  style="margin-top: 23px;">
+    <marquee class="alert w-100" role="alert" style="background-color: #283046; border-radius: 0px; color: #fff;">
       <div class="alert-body">
         {{ $running_text_announcement }}
       </div>

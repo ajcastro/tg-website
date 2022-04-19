@@ -22,10 +22,9 @@ data-textdirection="{{ env('MIX_CONTENT_DIRECTION') === 'rtl' ? 'rtl' : 'ltr' }}
   <meta name="author" content="PIXINVENT">
   <title>
     @hasSection ('title')
-      {{-- @yield('title')  --}}
-      {{ current_website()->setting->title }} | {{ current_website()->setting->brand_name }}
+      @yield('title')
     @else
-      TeleGaming
+      {{ current_website()->setting->title }} | {{ current_website()->setting->brand_name }}
     @endif
   </title>
   <link rel="apple-touch-icon" href="{{asset('images/ico/apple-icon-120.png')}}">

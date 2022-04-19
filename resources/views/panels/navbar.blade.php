@@ -57,15 +57,15 @@
     @endif
     <ul class="nav navbar-nav bookmark-icons">
       <li class="nav-item">
-
-        <a class="navbar-brand" href="/">
-          <img src="{{ \App\Models\Website::getCurrentWebsite()->setting->logo_url }}" height="38" class="" />
+        <div class="navbar-brand" style="padding-bottom: 0px;">
+          <img src="{{ \App\Models\Website::getCurrentWebsite()->setting->logo_url }}" height="50" />
           {{-- &nbsp; --}}
           {{-- TELE<span>GAMING</span> --}}
-          <span id="realtime-clock" style="font-size: 14px; color: #fff; margin-left: 10px;">
+          <div></div>
+          <span id="realtime-clock" style="font-size: 12px; color: #fff;">
             Loading...
           </span>
-        </a>
+        </div>
       </li>
     </ul>
   </div>

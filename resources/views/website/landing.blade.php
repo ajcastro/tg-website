@@ -21,7 +21,7 @@
 
   @if ($running_text_announcement)
   <div class="col-12"  style="padding-left: 0px; padding-right: 0px;">
-    <marquee class="alert w-100" role="alert" style="background-color: #283046; border-radius: 0px; margin-top: 12px; color: #fff;">
+    <marquee class="alert w-100" role="alert" style="background-color: #283046; border-radius: 0px; margin-top: 67px; color: #fff;">
       <div class="alert-body">
         {{ $running_text_announcement }}
       </div>
@@ -31,7 +31,7 @@
 
   <div class="col">
   </div>
-  <div class="col-xs-12 col-md-6" style="min-height: 450px; margin-top: 55px;">
+  <div class="col-xs-12 col-md-6" style="min-height: 450px; margin-top: 0px;">
     @guest
     <x-auth.login-card />
     @endguest

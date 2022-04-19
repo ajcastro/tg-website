@@ -58,6 +58,16 @@ class Website extends Model implements AccessibleByUser
         });
     }
 
+    public static function getCurrentWebsite(): Website
+    {
+        return static::find(static::getWebsiteId());
+    }
+
+    public function setting()
+    {
+        return $this->hasOne(WebsiteSetting::class)->withDefault();
+    }
+
     public function parentGroups()
     {
         return $this->belongsToMany(ParentGroup::class, 'parent_groups_websites');

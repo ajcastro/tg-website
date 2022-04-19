@@ -22,7 +22,8 @@ data-textdirection="{{ env('MIX_CONTENT_DIRECTION') === 'rtl' ? 'rtl' : 'ltr' }}
   <meta name="author" content="PIXINVENT">
   <title>
     @hasSection ('title')
-      @yield('title') - TeleGaming
+      {{-- @yield('title')  --}}
+      {{ current_website()->setting->title }} | {{ current_website()->setting->brand_name }}
     @else
       TeleGaming
     @endif

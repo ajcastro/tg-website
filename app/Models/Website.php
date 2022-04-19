@@ -92,4 +92,9 @@ class Website extends Model implements AccessibleByUser
     {
         $query->where('assigned_client_id', $user->parentGroup->client_id);
     }
+
+    public function isDownForMaintenance()
+    {
+        return !$this->is_active;
+    }
 }

@@ -61,7 +61,7 @@
         <a class="navbar-brand" href="/">
           <img src="{{ \App\Models\Website::getCurrentWebsite()->setting->logo_url }}" height="38" class="" />
           &nbsp;
-          TELE<span>GAMING</span>
+          {{-- TELE<span>GAMING</span> --}}
         </a>
       </li>
     </ul>

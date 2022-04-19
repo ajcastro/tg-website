@@ -79,6 +79,17 @@ data-asset-path="{{ asset('/')}}">
         });
       }
     })
+
+    $(document).ready(function() {
+      clockUpdate();
+      setInterval(clockUpdate, 1000);
+    })
+
+    function clockUpdate() {
+      var timezone = '{{ current_website()->setting->timezone }}'
+      var display = dayjs().tz(timezone).format('DD MMM YYYY, hh:mm:ss a')
+      $('#realtime-clock').text(display)
+    }
   </script>
 </body>
 </html>

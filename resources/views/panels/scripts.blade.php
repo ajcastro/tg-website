@@ -7,6 +7,11 @@
 @stack('vendor-script')
 <!-- END: Page Vendor JS-->
 <!-- BEGIN: Theme JS-->
+<script src="https://unpkg.com/dayjs@1.11.1/dayjs.min.js"></script>
+<script src="https://unpkg.com/dayjs@1.11.1/plugin/utc.js"></script>
+<script src="https://unpkg.com/dayjs@1.11.1/plugin/timezone.js"></script>
+<script>dayjs.extend(window.dayjs_plugin_utc)</script>
+<script>dayjs.extend(window.dayjs_plugin_timezone)</script>
 <script src="{{ asset(mix('js/core/app-menu.js')) }}"></script>
 <script src="{{ asset(mix('js/core/app.js')) }}"></script>
 

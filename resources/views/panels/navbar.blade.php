@@ -60,8 +60,11 @@
 
         <a class="navbar-brand" href="/">
           <img src="{{ \App\Models\Website::getCurrentWebsite()->setting->logo_url }}" height="38" class="" />
-          &nbsp;
+          {{-- &nbsp; --}}
           {{-- TELE<span>GAMING</span> --}}
+          <span id="realtime-clock" style="font-size: 14px; color: #fff; margin-left: 10px;">
+            Loading...
+          </span>
         </a>
       </li>
     </ul>

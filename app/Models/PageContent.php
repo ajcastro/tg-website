@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use App\Models\Contracts\RelatesToWebsite;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Artesaos\SEOTools\Facades\SEOTools;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\Builder as QueryBuilder;
+use Illuminate\Support\Str;
 
 class PageContent extends Model implements RelatesToWebsite
 {
@@ -72,5 +75,18 @@ class PageContent extends Model implements RelatesToWebsite
             $query->where('short_description', 'like', "%{$search}%");
             $query->orWhere('url', 'like', "%{$search}%");
         });
+    }
+
+    public function getKeywords(): array
+    {
+        return Str::of($this->meta_keyword)->explode(',')->all();
+    }
+
+    public function registerSeoTags()
+    {
+        SEOTools::setTitle($this->short_description);
+        SEOTools::setDescription($this->meta_description);
+        SEOTools::opengraph()->setUrl(url($this->url ?? ''));
+        SEOMeta::addKeyword($this->getKeywords());
     }
 }

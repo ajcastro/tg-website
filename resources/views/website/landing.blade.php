@@ -50,13 +50,9 @@
   </div>
 </div>
 
-@php
-  $homePage = \App\Models\PageContent::findBySlug('/');
-@endphp
-
-@if ($homePage)
+@if ($page)
 <div class="ql-editor">
-  {!! $homePage->content !!}
+  {!! $page->content !!}
 </div>
 @endif
 

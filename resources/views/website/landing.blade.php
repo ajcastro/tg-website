@@ -21,7 +21,8 @@
   @php
     $running_text_announcement = \App\Models\Website::getCurrentWebsite()->setting->running_text_announcement;
   @endphp
-  <div class="col-xs-12 col-sm-5 col-md-3 p-0"  style="margin-top: 22px;">
+  <div class="col-xs-12" style="margin-top: 22px;"></div>
+  <div class="col-xs-12 col-sm-5 col-md-3 p-0">
     <div class="alert w-100" role="alert" style="background-color: #000; border-radius: 0px; color: #fff; font-size: 12px; height: 40px; margin-bottom: 0px;">
       <div id="realtime-clock" class="alert-body text-center">
         {{ $running_text_announcement }}
@@ -29,7 +30,7 @@
     </div>
   </div>
   @if ($running_text_announcement)
-  <div class="col-xs-12 col-sm-7 col-md-9 p-0"  style="margin-top: 22px;">
+  <div class="col-xs-12 col-sm-7 col-md-9 p-0">
     <marquee class="alert w-100" role="alert" style="background-color: #283046; border-radius: 0px; color: #fff; height: 40px; margin-bottom: 0px;">
       <div class="alert-body">
         {{ $running_text_announcement }}

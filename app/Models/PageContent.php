@@ -42,7 +42,7 @@ class PageContent extends Model implements RelatesToWebsite
     ];
 
 
-    public static function findBySlug($slug): PageContent
+    public static function findBySlug($slug): ?PageContent
     {
         return static::where('url', $slug)
             ->where('is_shown', 1)

@@ -9,6 +9,7 @@
   "license": "MIT",
   "require": {
     "php": "^7.3|^8.0",
+    "artesaos/seotools": "^0.22.0",
     "bensampo/laravel-enum": "^4.",
     "doctrine/dbal": "^3.3",
     "fideloper/proxy": "^4.4",

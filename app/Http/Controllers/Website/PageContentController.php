@@ -10,10 +10,7 @@ class PageContentController extends Controller
 {
     public function renderPage(Request $request, $slug)
     {
-        /** @var PageContent */
-        $page = PageContent::where('url', $slug)
-            ->where('is_shown', 1)
-            ->firstOrFail();
+        $page = PageContent::findBySlugOrFail($slug);
 
         return view('website.page_content', [
             'page' => $page,

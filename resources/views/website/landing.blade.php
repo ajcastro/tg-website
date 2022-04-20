@@ -5,6 +5,9 @@
 @section('vendor-style')
 <link rel="stylesheet" href="{{ asset(mix('vendors/css/animate/animate.min.css')) }}">
 <link rel="stylesheet" href="{{ asset(mix('vendors/css/extensions/sweetalert2.min.css')) }}">
+<link href="//cdn.quilljs.com/1.3.7/quill.core.css" rel="stylesheet" />
+<link href="//cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet" />
+<link href="//cdn.quilljs.com/1.3.7/quill.bubble.css" rel="stylesheet" />
 @endsection
 
 @section('page-style')
@@ -46,6 +49,17 @@
     @include('website.landing-page.slider')
   </div>
 </div>
+
+@php
+  $homePage = \App\Models\PageContent::findBySlug('/');
+@endphp
+
+@if ($homePage)
+<div class="ql-editor">
+    {!! $page->content !!}
+</div>
+@endif
+
 <!-- INCLUDE MODALS  -->
 @auth
   @include('website.deposit.modal')

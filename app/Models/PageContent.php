@@ -41,6 +41,21 @@ class PageContent extends Model implements RelatesToWebsite
         'is_footer_displayed' => 'boolean',
     ];
 
+
+    public static function findBySlug($slug): PageContent
+    {
+        return static::where('url', $slug)
+            ->where('is_shown', 1)
+            ->first();
+    }
+
+    public static function findBySlugOrFail($slug): PageContent
+    {
+        return static::where('url', $slug)
+            ->where('is_shown', 1)
+            ->firstOrFail();
+    }
+
     public function website()
     {
         return $this->belongsTo(Website::class);

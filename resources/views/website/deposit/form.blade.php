@@ -15,12 +15,12 @@
         @csrf
         <div class="mb-1">
             <label class="form-label" for="bank-sender">Bank Sender</label>
-            <a data-bs-toggle="modal"
+            {{-- <a data-bs-toggle="modal"
                 data-bs-target="#memberBankModal"
                 href="javascript:void(0)"
                 class="ms-1">
                 <span>{{__('Add Bank')}}</span>
-            </a>
+            </a> --}}
             <select class="form-select" id="bank-sender" required name="account_sender_id">
                 <option value="">- Select Bank -</option>
                 @foreach (auth()->user()->banks as $bank)

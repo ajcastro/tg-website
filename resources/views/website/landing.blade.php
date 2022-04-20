@@ -56,7 +56,7 @@
 
 @if ($homePage)
 <div class="ql-editor">
-    {!! $page->content !!}
+    {!! $homePage->content !!}
 </div>
 @endif
 

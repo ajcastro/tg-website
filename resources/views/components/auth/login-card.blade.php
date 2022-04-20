@@ -9,7 +9,7 @@
       $jackpot_image_url = current_website()->setting->jackpot_image_url ?? null;
     @endphp
     @if ($jackpot_image_url)
-    <img src="{{ $jackpot_image_url }}" height="100" width="100%" class="mb-2" />
+    <img src="{{ $jackpot_image_url }}" height="100" width="100%" class="mb-3" />
     @endif
     <!-- Login basic -->
     <div class="card mb-0">

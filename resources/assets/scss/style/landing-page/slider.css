@@ -18,6 +18,11 @@
     height: 250px;
 }
 
+.swiper-horizontal>.swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+    bottom: 0px;
+}
+
 .banner .slide {
     background-color: transparent;
     border-radius: 20px;

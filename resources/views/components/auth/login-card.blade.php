@@ -5,6 +5,12 @@
 
 <div class="auth-wrapper auth-basic px-2" style="min-height: 480px;">
   <div class="auth-inner my-2">
+    @php
+      $jackpot_image_url = current_website()->setting->jackpot_image_url ?? null;
+    @endphp
+    @if ($jackpot_image_url)
+    <img src="{{ $jackpot_image_url }}" height="100" width="100%" />
+    @endif
     <!-- Login basic -->
     <div class="card mb-0">
       <div class="card-body">

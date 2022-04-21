@@ -1,7 +1,7 @@
 {{-- BEGIN: Customizer --}}
 <div class="customizer d-none d-md-block">
 
-  <a class="customizer-toggle d-flex align-items-center justify-content-center" href="javascript:void(0);" style="background-color: gold; color: #000 !important;">
+  <a class="customizer-toggle d-flex align-items-center justify-content-center" href="javascript:void(0);" style="background-color: #fdb813; color: #000 !important;">
     <div class="bottom-to-top center fs-lg" style="margin-right: 8px;">
       <i data-feather='phone-call'></i>
        &nbsp;CONTACT US &nbsp;

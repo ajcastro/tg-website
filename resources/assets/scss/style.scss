@@ -94,8 +94,46 @@ ul.nav.navbar-nav.navbar-menu {
 .customizer {
 	height: auto;
 	top: auto;
+	bottom: 15%;
+	// bottom: 5v;
 	width: 300px;
 	right: -300px;
-
 	border: 1px solid #161D31;
+}
+
+.customizer .customizer-toggle .feather {
+	width: 25px;
+	height: 25px;
+}
+
+.customizer .customizer-toggle
+{
+	width: 53px;
+	height: 180px;
+	left: -54px;
+	top: 0%;
+}
+
+.fs-lg {
+	font-size: 17.5px !important;
+}
+
+.center,
+.img-center {
+	margin: 0 auto;
+}
+
+.bottom-to-top,
+.toptobottom {
+	// -ms-writing-mode: tb-rl;
+	display: inline-block;
+}
+
+.bottom-to-top {
+	writing-mode: tb-rl;
+	writing-mode: vertical-rl;
+}
+
+.bottom-to-top {
+	transform: none !important;
 }

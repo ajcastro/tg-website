@@ -77,6 +77,11 @@ class PageContent extends Model implements RelatesToWebsite
         });
     }
 
+    public function isMainPage()
+    {
+        return $this->url === '/';
+    }
+
     public function getKeywords(): array
     {
         return Str::of($this->meta_keyword)->explode(',')->all();
@@ -84,7 +89,12 @@ class PageContent extends Model implements RelatesToWebsite
 
     public function registerSeoTags()
     {
-        SEOTools::setTitle($this->short_description);
+        if ($this->isMainPage()) {
+            SEOTools::setTitle(current_website()->setting->getMainPageTitle());
+        } else {
+            SEOTools::setTitle($this->short_description);
+        }
+
         SEOTools::setDescription($this->meta_description);
         SEOTools::opengraph()->setUrl(url($this->url ?? ''));
         SEOMeta::addKeyword($this->getKeywords());

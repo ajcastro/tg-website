@@ -105,4 +105,9 @@ class WebsiteSetting extends Model
     {
         return storage_disk_url($this->jackpot_image);
     }
+
+    public function getMainPageTitle()
+    {
+        return $this->title . ' | '.$this->brand_name;
+    }
 }

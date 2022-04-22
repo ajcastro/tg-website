@@ -11,7 +11,7 @@ class HelpController extends Controller
 {
     public function index(Request $request)
     {
-        $categories = GuideList::onlyActive()->pluck('category');
+        $categories = GuideList::onlyActive()->distinct('category')->pluck('category');
         $activeCategory = $request->category ?? $categories->first();
 
         $guides = GuideList::onlyActive()

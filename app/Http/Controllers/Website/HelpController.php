@@ -14,7 +14,8 @@ class HelpController extends Controller
     {
         $categories = GuideList::onlyActive()->distinct('category')->pluck('category');
         $activeCategory = $request->category ?? $categories->first();
-        $page = PageContent::findBySlug('helps') ?? PageContent::findBySlug('help');
+        $page = PageContent::findBySlug('/helps') ?? PageContent::findBySlug('/help') ??
+            PageContent::findBySlug('helps') ?? PageContent::findBySlug('help');
 
         $guides = GuideList::onlyActive()
             ->eagerLoadGuideContentForWebsite(Website::getWebsiteId())

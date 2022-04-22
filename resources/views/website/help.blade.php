@@ -65,7 +65,7 @@
   </div>
 </div>
 
-@if (@page)
+@if ($page)
 <div class="ql-editor">
   {!! $page->content !!}
 </div>

@@ -16,7 +16,7 @@
       <div class="card-body">
         <div class="list-group">
         @foreach ($categories as $category)
-        <a href="{{ route('help', ['category' => $category]) }}"
+        <a href="{{ route('helps', ['category' => $category]) }}"
           class="list-group-item list-group-item-action {{ $activeCategory === $category ? 'active' : '' }}">
           {{ $category }} </a>
         @endforeach

@@ -64,6 +64,9 @@
     </div>
   </div>
 </div>
+<div class="ql-editor">
+  {!! $page->content !!}
+</div>
 @endsection
 
 @section('vendor-script')

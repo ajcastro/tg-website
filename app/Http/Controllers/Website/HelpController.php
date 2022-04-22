@@ -17,7 +17,7 @@ class HelpController extends Controller
         $page = PageContent::findBySlug('/helps') ?? PageContent::findBySlug('/help') ??
             PageContent::findBySlug('helps') ?? PageContent::findBySlug('help');
 
-        $page->registerSeoTags();
+        $page?->registerSeoTags();
 
         $guides = GuideList::onlyActive()
             ->eagerLoadGuideContentForWebsite(Website::getWebsiteId())

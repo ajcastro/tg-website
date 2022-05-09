@@ -3,13 +3,19 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\PaginateOrListResource;
+use App\Http\Queries\MarketQuery;
 use App\Models\Market;
 use Illuminate\Http\Request;
 
 class MarketController extends Controller
 {
-    public function index()
+    use PaginateOrListResource;
+
+    public function __construct()
     {
-        return Market::get(['id', 'name', 'status']);
+        $this->hook(function () {
+            $this->query = new MarketQuery;
+        });
     }
 }

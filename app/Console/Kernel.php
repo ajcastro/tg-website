@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
-        $schedule->job(new OpenGameMarket)->dailyAt('17:00'); // runs at indonesia 12am/midnight
+        // $schedule->job(new OpenGameMarket)->dailyAt('17:00'); // runs at indonesia 12am/midnight
     }
 
     /**

@@ -22,7 +22,8 @@ class CreateGameMarketsTable extends Migration
             $table->unsignedInteger('period')->comment('running number for period');
             $table->timestamp('close_time')->index();
             $table->timestamp('result_time')->index();
-            $table->string('market_result')->nullable()->comment('this is null at first because game_market is still not closed, but when it closed there will be result');
+            $table->string('market_result')->nullable()
+                ->comment('this is null at first because game_market is still not closed, but when it closed there will be result');
             $table->unsignedTinyInteger('result_day')->comment('dayOfWeek in integer format base from market_period');
             $table->timestamps();
         });

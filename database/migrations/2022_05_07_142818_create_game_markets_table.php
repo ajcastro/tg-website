@@ -19,7 +19,7 @@ class CreateGameMarketsTable extends Migration
             $table->id();
             $table->string('market_code')->index();
             $table->date('market_period')->index();
-            $table->unsignedInteger('period');
+            $table->unsignedInteger('period')->comment('running number for period');
             $table->timestamp('close_time')->index();
             $table->timestamp('result_time')->index();
             $table->string('market_result')->nullable()->comment('this is null at first because game_market is still not closed, but when it closed there will be result');

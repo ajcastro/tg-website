@@ -63,6 +63,26 @@ return [
             ]) : [],
         ],
 
+        'game4d' => [
+            'driver' => 'mysql',
+            'url' => env('GAME4D_DATABASE_URL'),
+            'host' => env('GAME4D_DB_HOST', '127.0.0.1'),
+            'port' => env('GAME4D_DB_PORT', '3306'),
+            'database' => env('GAME4D_DB_DATABASE', 'forge'),
+            'username' => env('GAME4D_DB_USERNAME', 'forge'),
+            'password' => env('GAME4D_DB_PASSWORD', ''),
+            'unix_socket' => env('GAME4D_DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('GAME4D_MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),

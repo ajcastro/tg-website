@@ -33,7 +33,6 @@ class Market extends Model
         'id' => 'integer',
     ];
 
-
     /**
      * This is a hasOne relation in conjunction with a website.
      */
@@ -50,6 +49,11 @@ class Market extends Model
         return $this->hasOne(MarketLimitSetting::class)->withDefault();
     }
 
+    public function latestGameMarketResult()
+    {
+        return $this->belongsTo(GameMarket::class);
+    }
+
     public function scopeMarketsForToday($query, $today)
     {
         $dayOfWeekInText = carbon($today)->format('l');
@@ -58,5 +62,16 @@ class Market extends Model
             $query->where('is_result_day_everyday', 1);
             $query->orWhere('result_day', 'like', '%'.$dayOfWeekInText.'%'); // TODO: change to json query later
         });
+    }
+
+    public function scopeWithLatestGameMarketResult($query)
+    {
+        $query->addSelect([
+            'latest_game_market_result_id' => GameMarket::select('id')
+                ->whereColumn('markets.code', 'game_markets.market_code')
+                ->whereNotNull('market_result')
+                ->latest()
+                ->take(1),
+        ])->with('latestGameMarketResult');
     }
 }

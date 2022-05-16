@@ -21,10 +21,6 @@ class Game4DHttpFactory
     {
         $member = auth()->user();
 
-        if (!app()->isProduction()) {
-            $member = Member::first();
-        }
-
         static::$token = static::getToken($member);
 
         $http = Http::withToken(static::$token)

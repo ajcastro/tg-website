@@ -285,7 +285,7 @@ class Member extends Authenticatable implements RelatesToWebsite
     public function createTokenForGame4dAuth()
     {
         return remember(
-            "token_for_game4d.{$this->id}",
+            "token_for_game4d_auth.{$this->id}",
             app()->isProduction() ? now()->addHours(1) : now()->addMinute(),
             function () {
                 return $this->createToken('game4d_auth')->plainTextToken;

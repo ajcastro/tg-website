@@ -33,7 +33,9 @@ class Market extends Model
 
     public static function getDisplayableMarkets()
     {
-        return remember('game4d.market_results', now()->addMinutes(5), function () {
+        $isProduction = app()->isProduction();
+
+        return remember('game4d.market_results', now()->addMinutes($isProduction ? 1 : 0), function () {
             $api = Game4DHttpFactory::instance();
             $results = $api->getMarketResults();
 

@@ -10,8 +10,13 @@ class Game4dController extends Controller
 {
     public function index()
     {
+        $page = new PageContent([
+            'short_description' => '4D Game',
+        ]);
+        $page->registerSeoTags();
+
         return view('website.game4d', [
-            'page' => new PageContent()
+            'page' => $page,
         ]);
     }
 }

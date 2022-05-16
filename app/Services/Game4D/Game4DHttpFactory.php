@@ -30,8 +30,12 @@ class Game4DHttpFactory
         return new Game4DHttp($http);
     }
 
-    public static function getToken(Member $member)
+    public static function getToken(?Member $member)
     {
+        if (is_null($member)) {
+            return;
+        }
+
         $isProduction = app()->isProduction();
 
         return remember("game4d.sanctum_token.{$member->id}", now()->addMinutes($isProduction ? 30 : 1), function () use ($member) {

@@ -21,7 +21,7 @@ $markets =  \App\Services\Game4D\Market::getDisplayableMarkets();
     <div class="col-md-6 col-lg-3" style="">
       <div class="card">
         <div class="card-body text-center">
-          <a href="{{ auth()->user()->getLinkToOpenGame4d() }}" target="_blank" class="text-white" >
+          <a href="{{ auth()->user()?->getLinkToOpenGame4d() ?? '#' }}" target="_blank" class="text-white" >
             <img class="img-fluid my-2" src="{{ $market->flag_url }}" width="80px" alt="" />
             <h4 class="card-title"> {{ $market->name }} </h4>
             <p class="card-text">

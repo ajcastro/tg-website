@@ -16,8 +16,7 @@ $markets =  \App\Services\Game4D\Market::getDisplayableMarkets();
 
 @section('content')
 <div class="mt-3"></div>
-{{-- TODO: Make the margin responsive, disable the margin on sm and xs screen --}}
-<div class="row" style="margin-left: 150px; margin-right: 150px;">
+<div class="row mx-3 mx-md-5 px-md-4" style="">
   @foreach ($markets as $market)
     <div class="col-md-6 col-lg-3" style="">
       <div class="card">

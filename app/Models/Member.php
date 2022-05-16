@@ -7,11 +7,13 @@ use App\Enums\MemberTransactionStatus;
 use App\Enums\WarningStatus;
 use App\Http\Queries\MemberQuery;
 use App\Models\Contracts\RelatesToWebsite;
+use App\Services\Game4D\Game4DHttpFactory;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
@@ -268,5 +270,26 @@ class Member extends Authenticatable implements RelatesToWebsite
         return $this->memberPromotions()->where('member_promotions.promotion_id', $promotion->id)
             ->whereRaw('MONTH(deposit_date)', $date->month)
             ->count();
+    }
+
+    public function getLinkToOpenGame4d()
+    {
+        $query = Arr::query([
+            'token' => $this->createTokenForGame4dAuth(),
+            'from_website_url' => url('/'),
+        ]);
+
+        return config('services.game4d.url').'/api/gamesite/auth/login?'.$query;
+    }
+
+    public function createTokenForGame4dAuth()
+    {
+        return remember(
+            "token_for_game4d.{$this->id}",
+            app()->isProduction() ? now()->addHours(1) : now()->addMinute(),
+            function () {
+                return $this->createToken('game4d_auth')->plainTextToken;
+            }
+        );
     }
 }

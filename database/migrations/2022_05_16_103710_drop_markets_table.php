@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddImageInMarketsTable extends Migration
+class DropMarketsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,6 @@ class AddImageInMarketsTable extends Migration
      */
     public function up()
     {
-        Schema::table('markets', function (Blueprint $table) {
-            $table->string('image')->nullable()->after('status');
-        });
+        Schema::dropIfExists('markets');
     }
 }

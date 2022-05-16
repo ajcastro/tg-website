@@ -1,5 +1,5 @@
 @php
-$markets =  \App\Models\Market::withLatestGameMarketResult()->get()->filter(fn ($market) => $market->latestGameMarketResult);
+$markets =  \App\Services\Game4D\Market::getDisplayableMarkets();
 @endphp
 
 @extends('layouts/contentLayoutMaster')
@@ -22,13 +22,15 @@ $markets =  \App\Models\Market::withLatestGameMarketResult()->get()->filter(fn (
     <div class="col-md-6 col-lg-3" style="">
       <div class="card">
         <div class="card-body text-center">
-          <img class="img-fluid my-2" src="{{asset('images/slider/06.jpg')}}" width="80px" alt="" />
-          <h4 class="card-title"> {{ $market->name }} </h4>
-          <p class="card-text">
-            {{$market->latestGameMarketResult->market_period->format('l') ?? '' }} <br>
-            {{$market->latestGameMarketResult->market_period->format('d F, Y') ?? '' }}
-          </p>
-          <p class="h1 text-white"> {{$market->latestGameMarketResult->market_result ?? '' }} </p>
+          <a href="{{ auth()->user()->getLinkToOpenGame4d() }}" target="_blank" class="text-white" >
+            <img class="img-fluid my-2" src="{{ $market->flag_url }}" width="80px" alt="" />
+            <h4 class="card-title"> {{ $market->name }} </h4>
+            <p class="card-text">
+              {{$market->date->format('l') ?? '' }} <br>
+              {{$market->date->format('d F, Y') ?? '' }}
+            </p>
+            <p class="h1 text-white"> {{$market->result ?? '' }} </p>
+          </a>
         </div>
       </div>
     </div>

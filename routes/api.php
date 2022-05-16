@@ -14,6 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:members')->get('/user', function (Request $request) {
+    /** @var \App\Models\Member */
+    $member = $request->user();
+
+    return $member->only([
+        'id', 'username',
+    ]) + [
+        'website' => $member->website->only(['id', 'code']),
+    ];
 });

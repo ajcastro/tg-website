@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Website\ChangePasswordController;
 use App\Http\Controllers\Website\DepositController;
+use App\Http\Controllers\Website\Game4dController;
 use App\Http\Controllers\Website\HelpController;
 use App\Http\Controllers\Website\IndexController;
 use App\Http\Controllers\Website\MemberBankController;
@@ -31,5 +32,7 @@ Auth::routes();
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout.get');
 Route::get('/helps', [HelpController::class, 'index'])->name('helps');
 Route::get('/help', [HelpController::class, 'index'])->name('help');
+
+Route::get('/4dgame', [Game4dController::class, 'index']);
 
 Route::get('/{any}', [PageContentController::class, 'renderPage'])->where('any', '.*');

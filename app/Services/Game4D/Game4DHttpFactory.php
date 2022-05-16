@@ -34,7 +34,7 @@ class Game4DHttpFactory
     {
         $isProduction = app()->isProduction();
 
-        return remember("game4d.sanctum_token.{$member->id}", $isProduction ? now()->addMinutes(30) : 0, function () use ($member) {
+        return remember("game4d.sanctum_token.{$member->id}", now()->addMinutes($isProduction ? 30 : 1), function () use ($member) {
             $response = Http::withHeaders(['Accept' => 'application/json'])
                 ->post(config('services.game4d.url').'/api/gamesite/auth/login', [
                     'token' => $member->createToken('game4d_http')->plainTextToken, // TODO: expire tokens after 12 hours
